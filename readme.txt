@@ -6,3 +6,5 @@ Information on LilyGO T-Display RP2040 is summarized in the following website.
 
 https://github.com/Xinyuan-LilyGO/LILYGO-T-display-RP2040
 
+LilyGO T-Display RP2040 に搭載のパネルは 135x240 である。
+The panel in the LilyGO T-Display RP2040 is 135x240.
