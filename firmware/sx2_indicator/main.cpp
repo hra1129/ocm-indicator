@@ -32,7 +32,10 @@
 #include "pico/stdlib.h"
 #include "tft_driver.h"
 
-static uint16_t buffer[ 240 * 320 ];
+#define IMAGE_SIZE (240 * 135)
+
+static uint16_t buffer1[ IMAGE_SIZE ];
+static uint16_t buffer2[ IMAGE_SIZE ];
 
 // --------------------------------------------------------------------
 int main( void ) {
@@ -41,13 +44,14 @@ int main( void ) {
 	stdio_init_all();
 	tft_init();
 
-	for( i = 0; i < (int)(sizeof(buffer)/sizeof(buffer[0])); i++ ) {
-		buffer[i] = (uint16_t) rand();
+	for( i = 0; i < IMAGE_SIZE; i++ ) {
+		buffer1[i] = (uint16_t) (rand() + 0x2345);
+		buffer2[i] = (uint16_t) (rand() + 0x1234);
 	}
+
 	for(;;) {
-		printf( "SX|2 Indicator.\n" );
-		tft_send_framebuffer( buffer );
-		sleep_ms( 1000 );
+		tft_send_framebuffer( buffer1 );
+		tft_send_framebuffer( buffer2 );
 	}
 	return 0;
 }

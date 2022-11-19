@@ -229,7 +229,7 @@ bool tft_init( void ) {
 		return false;	//	error.
 	}
 	dma_tx_config = dma_channel_get_default_config( dma_tx_channel );
-	channel_config_set_transfer_data_size( &dma_tx_config, DMA_SIZE_16 );
+	channel_config_set_transfer_data_size( &dma_tx_config, DMA_SIZE_8 );
 	channel_config_set_dreq( &dma_tx_config, spi_get_index( SPI_PORT ) ? DREQ_SPI1_TX : DREQ_SPI0_TX );
 
 	gpio_init( TFT_RESET );
@@ -358,22 +358,21 @@ bool tft_init( void ) {
 	_send_data( 0xBB );					// YE[7:0]
 
 	_send_command( ST7789_DISPON );		// Display on
+	_chip_select();
 	return true;
 }
 
 // --------------------------------------------------------------------
 void tft_send_framebuffer( const uint16_t *p_buffer ) {
 	int i, d;
-	//	const uint32_t len = TFT_WIDTH * TFT_HEIGHT;
+		const uint32_t len = TFT_WIDTH * TFT_HEIGHT;
 
-//	_wait_dma_ready();
-//	dma_channel_configure( dma_tx_channel, &dma_tx_config, &spi_get_hw( SPI_PORT )->dr, p_buffer, len, true );
-
-	_send_command( ST7789_MADCTL );
-	_send_data( TFT_MAD_COLOR_ORDER );
+	dma_channel_wait_for_finish_blocking( dma_tx_channel );
+	_wait_ready( SPI_PORT );
+	_chip_deselect();
 
 	_send_command( ST7789_MADCTL );
-	_send_data( 0x68 );					// ??
+	_send_data( 0x68 );
 
 	_chip_select();
 	_send_command( ST7789_CASET );		// Column address set
@@ -389,11 +388,34 @@ void tft_send_framebuffer( const uint16_t *p_buffer ) {
 	_send_data( 0xBB );					// YE[7:0]
 
 	_send_command( ST7789_RAMWR );
+	_wait_ready( SPI_PORT );
+	dma_channel_configure( dma_tx_channel, &dma_tx_config, &spi_get_hw( SPI_PORT )->dr, p_buffer, len * 2, true /* start */ );
 
-	for( i = 0; i < 240 * 135; i++ ) {
-		d = rand();
-		_send_data( d >> 8 );					// ??
-		_send_data( d & 255 );					// ??
-	}
-	_chip_deselect();
+//	_send_command( ST7789_MADCTL );
+//	_send_data( TFT_MAD_COLOR_ORDER );
+//
+//	_send_command( ST7789_MADCTL );
+//	_send_data( 0x68 );
+//
+//	_chip_select();
+//	_send_command( ST7789_CASET );		// Column address set
+//	_send_data( 0x00 );					// XS[15:8] X start address		0x0028 = 40
+//	_send_data( 0x28 );					// XS[7:0]
+//	_send_data( 0x01 );					// XE[15:8] X end address		0x0117 = 279
+//	_send_data( 0x17 );					// XE[7:0]
+//
+//	_send_command( ST7789_RASET );		// Row address set
+//	_send_data( 0x00 );					// YS[15:8] X start address		0x0035 = 53
+//	_send_data( 0x35 );					// YS[7:0]
+//	_send_data( 0x00 );					// YE[15:8] X end address		0x00BB = 187
+//	_send_data( 0xBB );					// YE[7:0]
+//
+//	_send_command( ST7789_RAMWR );
+//
+//	for( i = 0; i < 240 * 135; i++ ) {
+//		d = rand();
+//		_send_data( d >> 8 );					// ??
+//		_send_data( d & 255 );					// ??
+//	}
+//	_chip_deselect();
 }
