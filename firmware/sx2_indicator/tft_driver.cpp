@@ -172,29 +172,23 @@ static void _chip_deselect( void ) {
 
 // --------------------------------------------------------------------
 //	Send command
-static void _send_command( uint16_t command, bool with_sleep = true ) {
+static void _send_command( uint16_t command ) {
 
 	_chip_select();
 	_set_command_mode();
 	spi_write_blocking( SPI_PORT, (const uint8_t*) &command, 1 );
 	_set_data_mode();
 	_chip_deselect();
-	if( with_sleep ) {
-		sleep_us( 70 );
-	}
 }
 
 // --------------------------------------------------------------------
 //	Send data
-static void _send_data( uint8_t data, bool with_sleep = true ) {
+static void _send_data( uint8_t data ) {
 
 	_chip_select();
 	_set_data_mode();
 	spi_write_blocking( SPI_PORT, &data, 1 );
 	_chip_deselect();
-	if( with_sleep ) {
-		sleep_us( 70 );
-	}
 }
 
 // --------------------------------------------------------------------
@@ -225,7 +219,6 @@ bool tft_init( void ) {
 	spi_init( SPI_PORT, SPI_FREQUENCY );
 
 	//	setup SPI MODE3 (CPOL=1, CPHA=1), MSB first
-//	spi_set_format( SPI_PORT,  8, SPI_CPOL_1, SPI_CPHA_1, SPI_MSB_FIRST );
 	spi_set_format( SPI_PORT,  8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST );
 
 	gpio_set_function( TFT_SPI_CLK, GPIO_FUNC_SPI );
@@ -389,24 +382,24 @@ void tft_send_framebuffer( const uint16_t *p_buffer ) {
 	_send_data( 0x68 );					// ??
 
 	_chip_select();
-	_send_command( ST7789_CASET, false );
-	_send_data( 0x00, false );					// ??
-	_send_data( 0x28, false );					// ??
-	_send_data( 0x01, false );					// ??
-	_send_data( 0x17, false );					// ??
+	_send_command( ST7789_CASET );
+	_send_data( 0x00 );					// ??
+	_send_data( 0x28 );					// ??
+	_send_data( 0x01 );					// ??
+	_send_data( 0x17 );					// ??
 
-	_send_command( ST7789_RASET, false );
-	_send_data( 0x00, false );					// ??
-	_send_data( 0x35, false );					// ??
-	_send_data( 0x00, false );					// ??
-	_send_data( 0xBB, false );					// ??
+	_send_command( ST7789_RASET );
+	_send_data( 0x00 );					// ??
+	_send_data( 0x35 );					// ??
+	_send_data( 0x00 );					// ??
+	_send_data( 0xBB );					// ??
 
-	_send_command( ST7789_RAMWR, false );
+	_send_command( ST7789_RAMWR );
 
 	for( i = 0; i < 240 * 320; i++ ) {
 		d = rand();
-		_send_data( d >> 8, false );					// ??
-		_send_data( d & 255, false );					// ??
+		_send_data( d >> 8 );					// ??
+		_send_data( d & 255 );					// ??
 	}
 	_chip_deselect();
 }
