@@ -356,10 +356,8 @@ bool tft_init( void ) {
 	_send_data( 0x35 );					// YS[7:0]
 	_send_data( 0x00 );					// YE[15:8] X end address		0x00BB = 187
 	_send_data( 0xBB );					// YE[7:0]
-	sleep_ms( 120 );
 
 	_send_command( ST7789_DISPON );		// Display on
-	sleep_ms( 120 );
 	return true;
 }
 
