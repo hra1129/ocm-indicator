@@ -247,18 +247,15 @@ bool tft_init( void ) {
 	_set_data_mode();
 	_tft_backlight_on();
 
+	_tft_reset();
+	gpio_put( TFT_PWR_EN, 1 );
+	sleep_ms( 1 );
 	_tft_active();
 	sleep_ms( 1 );
-	gpio_put( TFT_PWR_EN, 1 );
-	sleep_ms( 5 );
-	_tft_reset();
-	sleep_ms( 20 );
-	_tft_active();
-	sleep_ms( 150 );
 
 	// ---------------- initialize command
 	_send_command( ST7789_SLPOUT );		// Sleep out
-	sleep_ms( 120 );
+	sleep_ms( 1 );
 	_send_command( ST7789_NORON );		// Normal display mode on
 
 	// ---------------- display and color format setting
@@ -346,20 +343,19 @@ bool tft_init( void ) {
 	_send_data( 0x1b );
 	_send_data( 0x1e );
 
-	//_send_command( ST7789_INVON );
 	_send_command( ST7789_INVOFF );
 
 	_send_command( ST7789_CASET );		// Column address set
-	_send_data( 0x00 );
-	_send_data( 0x00 );
-	_send_data( 0x00 );
-	_send_data( 0xE5 );    // 239
+	_send_data( 0x00 );					// XS[15:8] X start address		0x0028 = 40
+	_send_data( 0x28 );					// XS[7:0]
+	_send_data( 0x01 );					// XE[15:8] X end address		0x0117 = 279
+	_send_data( 0x17 );					// XE[7:0]
 
 	_send_command( ST7789_RASET );		// Row address set
-	_send_data( 0x00 );
-	_send_data( 0x00 );
-	_send_data( 0x01 );
-	_send_data( 0x3F );    // 319
+	_send_data( 0x00 );					// YS[15:8] X start address		0x0035 = 53
+	_send_data( 0x35 );					// YS[7:0]
+	_send_data( 0x00 );					// YE[15:8] X end address		0x00BB = 187
+	_send_data( 0xBB );					// YE[7:0]
 	sleep_ms( 120 );
 
 	_send_command( ST7789_DISPON );		// Display on
@@ -382,21 +378,21 @@ void tft_send_framebuffer( const uint16_t *p_buffer ) {
 	_send_data( 0x68 );					// ??
 
 	_chip_select();
-	_send_command( ST7789_CASET );
-	_send_data( 0x00 );					// ??
-	_send_data( 0x28 );					// ??
-	_send_data( 0x01 );					// ??
-	_send_data( 0x17 );					// ??
+	_send_command( ST7789_CASET );		// Column address set
+	_send_data( 0x00 );					// XS[15:8] X start address		0x0028 = 40
+	_send_data( 0x28 );					// XS[7:0]
+	_send_data( 0x01 );					// XE[15:8] X end address		0x0117 = 279
+	_send_data( 0x17 );					// XE[7:0]
 
-	_send_command( ST7789_RASET );
-	_send_data( 0x00 );					// ??
-	_send_data( 0x35 );					// ??
-	_send_data( 0x00 );					// ??
-	_send_data( 0xBB );					// ??
+	_send_command( ST7789_RASET );		// Row address set
+	_send_data( 0x00 );					// YS[15:8] X start address		0x0035 = 53
+	_send_data( 0x35 );					// YS[7:0]
+	_send_data( 0x00 );					// YE[15:8] X end address		0x00BB = 187
+	_send_data( 0xBB );					// YE[7:0]
 
 	_send_command( ST7789_RAMWR );
 
-	for( i = 0; i < 240 * 320; i++ ) {
+	for( i = 0; i < 240 * 135; i++ ) {
 		d = rand();
 		_send_data( d >> 8 );					// ??
 		_send_data( d & 255 );					// ??
