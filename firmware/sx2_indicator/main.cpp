@@ -32,10 +32,67 @@
 #include "pico/stdlib.h"
 #include "tft_driver.h"
 
-#define IMAGE_SIZE (240 * 135)
+#define IMAGE_WIDTH		240
+#define IMAGE_HEIGHT	135
+#define IMAGE_SIZE		(IMAGE_WIDTH * IMAGE_HEIGHT)
 
-static uint16_t buffer1[ IMAGE_SIZE ];
-static uint16_t buffer2[ IMAGE_SIZE ];
+static uint16_t buffer[ IMAGE_SIZE ];
+
+// --------------------------------------------------------------------
+void draw_pset( int x, int y, int color ) {
+
+	if( x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT ) {
+		return;
+	}
+	buffer[ x + y * IMAGE_WIDTH ] = (uint16_t) color;
+}
+
+// --------------------------------------------------------------------
+void draw_line( int x1, int y1, int x2, int y2, int color ) {
+	int vx, vy, dx, dy, x, y, i;
+
+	dx = x2 - x1;
+	if( dx < 0 ) {
+		vx = -1;
+		dx = -dx;
+	}
+	else if( dx == 0 ) {
+		vx = 0;
+	}
+	else {
+		vx = 1;
+	}
+
+	dy = y2 - y1;
+	if( dy < 0 ) {
+		vy = -1;
+		dy = -dy;
+	}
+	else if( dy == 0 ) {
+		vy = 0;
+	}
+	else {
+		vy = 1;
+	}
+
+	if( dx == 0 && dy == 0 ) {
+		draw_pset( x1, y1, color );
+	}
+	else if( dx < dy ) {
+		for( i = 0; i <= dy; i++ ) {
+			x = x1 + (x2 - x1) * i / dy;
+			draw_pset( x, y1, color );
+			y1 += vy;
+		}
+	}
+	else {
+		for( i = 0; i <= dx; i++ ) {
+			y = y1 + (y2 - y1) * i / dx;
+			draw_pset( x1, y, color );
+			x1 += vx;
+		}
+	}
+}
 
 // --------------------------------------------------------------------
 int main( void ) {
@@ -44,14 +101,12 @@ int main( void ) {
 	stdio_init_all();
 	tft_init();
 
-	for( i = 0; i < IMAGE_SIZE; i++ ) {
-		buffer1[i] = (uint16_t) (rand() + 0x2345);
-		buffer2[i] = (uint16_t) (rand() + 0x1234);
-	}
-
+	memset( buffer, 0, sizeof(buffer) );
 	for(;;) {
-		tft_send_framebuffer( buffer1 );
-		tft_send_framebuffer( buffer2 );
+		for( i = 0; i < 10; i++ ) {
+			draw_line( rand() % 240, rand() % 135, rand() % 240, rand() % 135, rand() );
+		}
+		tft_send_framebuffer( buffer );
 	}
 	return 0;
 }
