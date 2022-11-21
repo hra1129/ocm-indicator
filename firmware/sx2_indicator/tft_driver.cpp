@@ -390,3 +390,34 @@ void tft_send_framebuffer( const uint16_t *p_buffer ) {
 	_wait_ready( SPI_PORT );
 	dma_channel_configure( dma_tx_channel, &dma_tx_config, &spi_get_hw( SPI_PORT )->dr, p_buffer, len, true /* start */ );
 }
+
+// --------------------------------------------------------------------
+void tft_pset( uint16_t *p_dest, int dest_width, int dest_height, int x, int y, uint16_t color ) {
+
+	if( x < 0 || y < 0 || x >= dest_width || y >= dest_height ) {
+		return;
+	}
+	p_dest[ x + y * dest_width ] = color;
+}
+
+// --------------------------------------------------------------------
+uint16_t tft_point( const uint16_t *p_src, int src_width, int src_height, int x, int y ) {
+
+	if( x < 0 || y < 0 || x >= src_width || y >= src_height ) {
+		return 0;
+	}
+	return p_src[ x + y * src_width ];
+}
+
+// --------------------------------------------------------------------
+void tft_copy( uint16_t *p_dest, int dest_width, int dest_height, int dx, int dy, const uint16_t *p_src, int src_width, int src_height, int sx, int sy, int copy_width, int copy_height ) {
+	int xx, yy;
+	uint16_t c;
+
+	for( yy = 0; yy < copy_height; yy++ ) {
+		for( xx = 0; xx < copy_width; xx++ ) {
+			c = tft_point( p_src, src_width, src_height, sx + xx, sy + yy );
+			tft_pset( p_dest, dest_width, dest_height, dx + xx, dy + yy, c );
+		}
+	}
+}

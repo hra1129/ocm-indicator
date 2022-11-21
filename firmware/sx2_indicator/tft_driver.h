@@ -45,4 +45,13 @@ bool tft_init( void );
 // --------------------------------------------------------------------
 void tft_send_framebuffer( const uint16_t *p_buffer );
 
+// --------------------------------------------------------------------
+void tft_pset( uint16_t *p_dest, int dest_width, int dest_height, int x, int y, uint16_t color );
+
+// --------------------------------------------------------------------
+uint16_t tft_point( const uint16_t *p_src, int src_width, int src_height, int x, int y );
+
+// --------------------------------------------------------------------
+void tft_copy( uint16_t *p_dest, int dest_width, int dest_height, int dx, int dy, const uint16_t *p_src, int src_width, int src_height, int sx, int sy, int copy_width, int copy_height );
+
 #endif
