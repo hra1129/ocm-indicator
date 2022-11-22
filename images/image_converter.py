@@ -18,12 +18,10 @@ def convert( input_name, output_name ):
 		return
 
 	img = img.convert( 'RGB' )
-	with open( "%s.cpp" % output_name, 'wt' ) as file:
-		file.write( '#include <cstdint>\n' )
-		file.write( '\n' )
+	with open( "%s.h" % output_name, 'wt' ) as file:
 		file.write( 'int %s_width  = %d;\n' % ( output_name, img.width ) )
 		file.write( 'int %s_height = %d;\n' % ( output_name, img.height ) )
-		file.write( 'uint16_t %s[] = {\n' % output_name )
+		file.write( 'const uint16_t %s[] = {\n' % output_name )
 		line_count = 0
 		x = 0
 		y = 0

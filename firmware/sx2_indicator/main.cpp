@@ -40,8 +40,9 @@ static uint16_t buffer1[ IMAGE_SIZE ];
 static uint16_t buffer2[ IMAGE_SIZE ];
 static uint16_t *p_draw_buffer;
 
-extern uint16_t background[];
-extern uint16_t msx[];
+#include "resource/grp_background.h"
+#include "resource/grp_msx.h"
+#include "resource/grp_indicator.h"
 
 //// --------------------------------------------------------------------
 //void draw_pset( int x, int y, int color ) {
@@ -109,10 +110,18 @@ int main( void ) {
 	y = 0;
 	p_draw_buffer = buffer1;
 	for(;;) {
-		tft_copy( p_draw_buffer, 240, 135, 0, 0, background, 240, 135, 0, 0, 240, 135 );
-		tft_copy( p_draw_buffer, 240, 135, 38, 35 + 64 - y, msx, 164, 64, 0, 0, 164, y );
 		if( y < 64 ) {
+			tft_copy( p_draw_buffer, 240, 135, 0, 0, grp_background, 240, 135, 0, 0, 240, 135 );
+			tft_copy( p_draw_buffer, 240, 135, 38, 35 + 64 - y, grp_msx, 164, 64, 0, 0, 164, y );
 			y++;
+		}
+		else if( y < 128 ) {
+			tft_copy( p_draw_buffer, 240, 135, 0, 0, grp_background, 240, 135, 0, 0, 240, 135 );
+			tft_copy( p_draw_buffer, 240, 135, 38, 35, grp_msx, 164, 64, 0, 0, 164, 64 );
+			y++;
+		}
+		else {
+			tft_copy( p_draw_buffer, 240, 135, 0, 0, grp_indicator, 240, 135, 0, 0, 240, 135 );
 		}
 		tft_send_framebuffer( p_draw_buffer );
 		if( p_draw_buffer == buffer1 ) {

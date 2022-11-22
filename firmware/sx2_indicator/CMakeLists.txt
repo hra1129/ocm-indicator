@@ -5,8 +5,6 @@ add_executable( sx2_indicator )
 target_sources( sx2_indicator PUBLIC
 	main.cpp
 	tft_driver.cpp
-	resource/background.cpp
-	resource/msx.cpp
 )
 
 # Make sure TinyUSB can find tusb_config.h
