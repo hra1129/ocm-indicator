@@ -5,6 +5,7 @@ add_executable( sx2_indicator )
 target_sources( sx2_indicator PUBLIC
 	main.cpp
 	tft_driver.cpp
+	usb_host_driver.c
 )
 
 # Make sure TinyUSB can find tusb_config.h
@@ -18,14 +19,14 @@ target_link_libraries( sx2_indicator PUBLIC
 	hardware_spi
 	hardware_dma
 	hardware_gpio
-#	pico_multicore
-#	tinyusb_device
-#	tinyusb_board
+	pico_multicore
+	tinyusb_host
+	tinyusb_board
 )
 
 # enable usb output, disable uart output
-pico_enable_stdio_usb(sx2_indicator 1)
-pico_enable_stdio_uart(sx2_indicator 0)
+#pico_enable_stdio_usb(sx2_indicator 1)
+#pico_enable_stdio_uart(sx2_indicator 0)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(sx2_indicator)

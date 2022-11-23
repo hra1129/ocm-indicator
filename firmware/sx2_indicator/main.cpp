@@ -23,14 +23,18 @@
 //	THE SOFTWARE.
 // --------------------------------------------------------------------
 
-#include <cstdlib>
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <cmath>
 
-#include "bsp/board.h"
+using namespace std;
+
 #include "pico/stdlib.h"
+#include "pico/multicore.h"
+#include "tusb.h"
 #include "tft_driver.h"
+#include "usb_host_driver.h"
 
 #define IMAGE_WIDTH		240
 #define IMAGE_HEIGHT	135
@@ -38,76 +42,17 @@
 
 static uint16_t buffer1[ IMAGE_SIZE ];
 static uint16_t buffer2[ IMAGE_SIZE ];
-static uint16_t *p_draw_buffer;
 
 #include "resource/grp_background.h"
 #include "resource/grp_msx.h"
 #include "resource/grp_indicator.h"
 
-//// --------------------------------------------------------------------
-//void draw_pset( int x, int y, int color ) {
-//
-//	if( x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT ) {
-//		return;
-//	}
-//	buffer[ x + y * IMAGE_WIDTH ] = (uint16_t) color;
-//}
-//
-//// --------------------------------------------------------------------
-//void draw_line( int x1, int y1, int x2, int y2, int color ) {
-//	int vx, vy, dx, dy, x, y, i;
-//
-//	dx = x2 - x1;
-//	if( dx < 0 ) {
-//		vx = -1;
-//		dx = -dx;
-//	}
-//	else if( dx == 0 ) {
-//		vx = 0;
-//	}
-//	else {
-//		vx = 1;
-//	}
-//
-//	dy = y2 - y1;
-//	if( dy < 0 ) {
-//		vy = -1;
-//		dy = -dy;
-//	}
-//	else if( dy == 0 ) {
-//		vy = 0;
-//	}
-//	else {
-//		vy = 1;
-//	}
-//
-//	if( dx == 0 && dy == 0 ) {
-//		draw_pset( x1, y1, color );
-//	}
-//	else if( dx < dy ) {
-//		for( i = 0; i <= dy; i++ ) {
-//			x = x1 + (x2 - x1) * i / dy;
-//			draw_pset( x, y1, color );
-//			y1 += vy;
-//		}
-//	}
-//	else {
-//		for( i = 0; i <= dx; i++ ) {
-//			y = y1 + (y2 - y1) * i / dx;
-//			draw_pset( x1, y, color );
-//			x1 += vx;
-//		}
-//	}
-//}
-
 // --------------------------------------------------------------------
-int main( void ) {
-	int y;
+static void response_core( void ) {
+	int y = 0;
+	uint16_t *p_draw_buffer;
 
-	stdio_init_all();
 	tft_init();
-
-	y = 0;
 	p_draw_buffer = buffer1;
 	for(;;) {
 		if( y < 64 ) {
@@ -130,6 +75,18 @@ int main( void ) {
 		else {
 			p_draw_buffer = buffer1;
 		}
+	}
+}
+
+// --------------------------------------------------------------------
+int main( void ) {
+
+	stdio_init_all();
+
+	multicore_launch_core1( response_core );
+
+	for( ;; ) {
+		tuh_task();
 	}
 	return 0;
 }
