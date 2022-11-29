@@ -9,12 +9,12 @@ target_sources( sx2_indicator PUBLIC
 )
 
 # Make sure TinyUSB can find tusb_config.h
-target_include_directories( sx2_indicator PUBLIC 
+target_include_directories( sx2_indicator PRIVATE 
 	${CMAKE_CURRENT_LIST_DIR}
 )
 
 # pull in common dependencies
-target_link_libraries( sx2_indicator PUBLIC 
+target_link_libraries( sx2_indicator PRIVATE 
 	pico_stdlib
 	hardware_spi
 	hardware_dma

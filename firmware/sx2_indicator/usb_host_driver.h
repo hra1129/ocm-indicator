@@ -31,6 +31,7 @@
 
 		#include <stdint.h>
 
+		bool is_mouse_active( void );
 		void get_mouse_position( int16_t *p_delta_x, int16_t *p_delta_y, int32_t *p_button );
 
 	#ifdef __cplusplus

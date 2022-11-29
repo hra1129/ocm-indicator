@@ -27,7 +27,9 @@
 #include <tusb.h>
 #include "tusb_config.h"
 #include "usb_host_driver.h"
+#include "hardware/gpio.h"		//	Åö 
 
+static volatile bool	mouse_is_active = false;
 static volatile int16_t	mouse_delta_x = 0;
 static volatile int16_t	mouse_delta_y = 0;
 static volatile int		mouse_resolution = 0;
@@ -40,11 +42,23 @@ static uint8_t report_count[ CFG_TUH_HID ];
 static tuh_hid_report_info_t report_info_arr[ CFG_TUH_HID ][ MAX_REPORT ];
 
 // --------------------------------------------------------------------
+bool is_mouse_active( void ) {
+	return mouse_is_active;
+}
+
+// --------------------------------------------------------------------
 void get_mouse_position( int16_t *p_delta_x, int16_t *p_delta_y, int32_t *p_button ) {
 
-	*p_delta_x	= mouse_delta_x;
-	*p_delta_y	= mouse_delta_y;
-	*p_button	= mouse_button;
+	if( mouse_is_active ) {
+		*p_delta_x	= mouse_delta_x;
+		*p_delta_y	= mouse_delta_y;
+		*p_button	= mouse_button;
+	}
+	else {
+		*p_delta_x	= 0;
+		*p_delta_y	= 0;
+		*p_button	= 0;
+	}
 	mouse_consume_data = true;
 }
 
@@ -97,7 +111,8 @@ void tuh_hid_mount_cb( uint8_t dev_addr, uint8_t instance, uint8_t const* desc_r
 	report_count[instance] = tuh_hid_parse_report_descriptor( report_info_arr[instance], MAX_REPORT, desc_report, desc_len );
 
 	if( interface_protocol == HID_ITF_PROTOCOL_MOUSE ) {
-		//process_mode = 1;	//	mouse_mode
+		gpio_put( 25, 1 );	//	Åö 
+		mouse_is_active = true;
 		mouse_delta_x = 0;
 		mouse_delta_y = 0;
 		mouse_button = 0;
@@ -114,11 +129,13 @@ void tuh_hid_mount_cb( uint8_t dev_addr, uint8_t instance, uint8_t const* desc_r
 //	Callback to be called when the gamepad is disconnected.
 //
 void tuh_hid_umount_cb( uint8_t dev_addr, uint8_t instance ) {
+	gpio_put( 25, 0 );	//	Åö 
 
 	(void) dev_addr;
 	(void) instance;
 
 	//process_mode = 0;	//	joypad_mode
+	mouse_is_active = false;
 }
 
 // --------------------------------------------------------------------
