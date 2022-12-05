@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.13)
 
+set(FAMILY rp2040)
+
 add_executable( sx2_indicator )
 
 target_sources( sx2_indicator PUBLIC
 	main.cpp
 	tft_driver.cpp
+	ps2dev_driver.cpp
 	usb_host_driver.c
 )
 

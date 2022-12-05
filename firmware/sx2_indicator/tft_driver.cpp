@@ -421,3 +421,35 @@ void tft_copy( uint16_t *p_dest, int dest_width, int dest_height, int dx, int dy
 		}
 	}
 }
+
+// --------------------------------------------------------------------
+void tft_puts( uint16_t *p_dest, int dest_width, int dest_height, int x, int y, uint16_t color, const uint8_t *p_font, const char *p_string ) {
+	int c, i, j, d;
+
+	while( *p_string != '\0' ) {
+		c = (int)*p_string & 0x7F;
+		if( c == '\n' ) {
+			x = 0;
+			y += 8;
+		}
+		if( c < ' ' ) {
+			continue;
+		}
+		c = (c - ' ') << 3;
+		for( j = 0; j < 8; j++ ) {
+			d = p_font[ c + j ];
+			for( i = 0; i < 8; i++ ) {
+				if( (d & 0x80) != 0 ) {
+					tft_pset( p_dest, dest_width, dest_height, x + i, y + j, color );
+				}
+				d <<= 1;
+			}
+		}
+		x += 8;
+		if( x >= dest_width ) {
+			x = 0;
+			y += 8;
+		}
+		p_string++;
+	}
+}

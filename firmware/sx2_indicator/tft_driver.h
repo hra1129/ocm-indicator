@@ -54,4 +54,7 @@ uint16_t tft_point( const uint16_t *p_src, int src_width, int src_height, int x,
 // --------------------------------------------------------------------
 void tft_copy( uint16_t *p_dest, int dest_width, int dest_height, int dx, int dy, const uint16_t *p_src, int src_width, int src_height, int sx, int sy, int copy_width, int copy_height );
 
+// --------------------------------------------------------------------
+void tft_puts( uint16_t *p_dest, int dest_width, int dest_height, int x, int y, uint16_t color, const uint8_t *p_font, const char *p_string );
+
 #endif

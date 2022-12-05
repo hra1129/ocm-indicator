@@ -27,29 +27,40 @@
 #include <tusb.h>
 #include "tusb_config.h"
 #include "usb_host_driver.h"
-#include "hardware/gpio.h"		//	š 
+#include "bsp/board.h"
 
-static volatile bool	mouse_is_active = false;
-static volatile int16_t	mouse_delta_x = 0;
-static volatile int16_t	mouse_delta_y = 0;
-static volatile int		mouse_resolution = 0;
-static int32_t			mouse_button = 0;
-static bool				mouse_consume_data = false;
+typedef enum {
+	DM_UNKNOWN = 0,
+	DM_MOUSE,
+	DM_GAMEPAD,
+} DETECT_MODE_T;
 
-#define MAX_REPORT  4
+static volatile DETECT_MODE_T	detect_mode = DM_UNKNOWN;
 
-static uint8_t report_count[ CFG_TUH_HID ];
-static tuh_hid_report_info_t report_info_arr[ CFG_TUH_HID ][ MAX_REPORT ];
+static volatile int16_t			mouse_delta_x = 0;
+static volatile int16_t			mouse_delta_y = 0;
+static volatile int				mouse_resolution = 0;
+static int32_t					mouse_button = 0;
+static bool						mouse_consume_data = false;
+
+#define MAX_REPORT	4
+#define DEBUG_ON	0
+
+// Each HID instance can has multiple reports
+static struct {
+	uint8_t report_count;
+	tuh_hid_report_info_t report_info[MAX_REPORT];
+} hid_info[ CFG_TUH_HID ];
 
 // --------------------------------------------------------------------
 bool is_mouse_active( void ) {
-	return mouse_is_active;
+	return( detect_mode == DM_MOUSE );
 }
 
 // --------------------------------------------------------------------
 void get_mouse_position( int16_t *p_delta_x, int16_t *p_delta_y, int32_t *p_button ) {
 
-	if( mouse_is_active ) {
+	if( detect_mode == DM_MOUSE ) {
 		*p_delta_x	= mouse_delta_x;
 		*p_delta_y	= mouse_delta_y;
 		*p_button	= mouse_button;
@@ -72,7 +83,7 @@ static void process_mouse_report( hid_mouse_report_t const * report ) {
 		mouse_delta_x = 0;
 		mouse_delta_y = 0;
 	}
-	delta_x = mouse_delta_x - (int16_t) report->x;
+	delta_x = mouse_delta_x + (int16_t) report->x;
 	if( delta_x < -127 ) {
 		delta_x = -127;
 	}
@@ -80,7 +91,7 @@ static void process_mouse_report( hid_mouse_report_t const * report ) {
 		delta_x = 127;
 	}
 
-	delta_y = mouse_delta_y - (int16_t) report->y;
+	delta_y = mouse_delta_y + (int16_t) report->y;
 	if( delta_y < -127 ) {
 		delta_y = -127;
 	}
@@ -102,24 +113,39 @@ static void process_mouse_report( hid_mouse_report_t const * report ) {
 //
 void tuh_hid_mount_cb( uint8_t dev_addr, uint8_t instance, uint8_t const* desc_report, uint16_t desc_len ) {
 
-	//	Check device type
-	uint8_t const interface_protocol = tuh_hid_interface_protocol( dev_addr, instance );
-
-	#if DEBUG_UART_ON
-		printf( "tuh_hid_mount_cb( %d, %d, %p, %d );\n", dev_addr, instance, desc_report, desc_len );
+	// Interface protocol (hid_interface_protocol_enum_t)
+	static const char* protocol_str[] = { "None", "Keyboard", "Mouse" };
+	uint8_t const itf_protocol = tuh_hid_interface_protocol( dev_addr, instance );
+	#if DEBUG_ON
+		printf( "tuh_hid_mount_cb( %d, %d ) : [%s]\r\n", dev_addr, instance, protocol_str[ itf_protocol ] );
 	#endif
-	report_count[instance] = tuh_hid_parse_report_descriptor( report_info_arr[instance], MAX_REPORT, desc_report, desc_len );
 
-	if( interface_protocol == HID_ITF_PROTOCOL_MOUSE ) {
-		gpio_put( 25, 1 );	//	š 
-		mouse_is_active = true;
+	// By default host stack will use activate boot protocol on supported interface.
+	// Therefore for this simple example, we only need to parse generic report descriptor (with built-in parser)
+	if( itf_protocol == HID_ITF_PROTOCOL_NONE ) {
+		hid_info[instance].report_count = tuh_hid_parse_report_descriptor(hid_info[instance].report_info, MAX_REPORT, desc_report, desc_len);
+		board_led_write( 0 );
+		detect_mode = DM_GAMEPAD;
+	}
+	else if( itf_protocol == HID_ITF_PROTOCOL_MOUSE ) {
+		board_led_write( 1 );
+		detect_mode = DM_MOUSE;
 		mouse_delta_x = 0;
 		mouse_delta_y = 0;
 		mouse_button = 0;
 		mouse_resolution = 0;
 	}
 	else {
-		//process_mode = 0;	//	joypad_mode
+		board_led_write( 0 );
+		detect_mode = DM_GAMEPAD;
+	}
+
+	// request to receive report
+	// tuh_hid_report_received_cb() will be invoked when report is available
+	if( !tuh_hid_receive_report( dev_addr, instance ) ) {
+		#if DEBUG_ON
+			printf( "Error: cannot request to receive report\r\n" );
+		#endif
 	}
 }
 
@@ -129,68 +155,34 @@ void tuh_hid_mount_cb( uint8_t dev_addr, uint8_t instance, uint8_t const* desc_r
 //	Callback to be called when the gamepad is disconnected.
 //
 void tuh_hid_umount_cb( uint8_t dev_addr, uint8_t instance ) {
-	gpio_put( 25, 0 );	//	š 
 
 	(void) dev_addr;
 	(void) instance;
 
-	//process_mode = 0;	//	joypad_mode
-	mouse_is_active = false;
+	//	‚±‚±‚ÍA‚È‚º‚©Ø’f‚³‚ê‚Ä‚¢‚È‚­‚Ä‚à•p”É‚ÉŒÄ‚Î‚ê‚é‚Ì‚Å‰½‚à‚µ‚È‚¢B
+	#if DEBUG_ON
+		printf( "tuh_hid_umount_cb( %d, %d )\r\n", dev_addr, instance );
+	#endif
+	detect_mode = DM_UNKNOWN;
 }
 
 // --------------------------------------------------------------------
 void tuh_hid_report_received_cb( uint8_t dev_addr, uint8_t instance, uint8_t const* report, uint16_t len ) {
 
-	(void) dev_addr;
+	uint8_t const itf_protocol = tuh_hid_interface_protocol( dev_addr, instance );
 
-	uint8_t const rpt_count = report_count[ instance ];
-	tuh_hid_report_info_t* rpt_info_arr = report_info_arr[ instance ];
-	tuh_hid_report_info_t* rpt_info = NULL;
-
-	#if DEBUG_UART_ON
-		printf( "tuh_hid_report_received_cb( %d, %d, %p, %d )\n", dev_addr, instance, report, len );
-	#endif
-
-	if ( rpt_count == 1 && rpt_info_arr[0].report_id == 0) {
-		// Simple report without report ID as 1st byte
-		rpt_info = &rpt_info_arr[0];
-	} else {
-		// Composite report, 1st byte is report ID, data starts from 2nd byte
-		uint8_t const rpt_id = report[0];
-
-		// Find report id in the arrray
-		for( uint8_t i = 0; i < rpt_count; i++ ) {
-			if( rpt_id == rpt_info_arr[i].report_id ) {
-				rpt_info = &rpt_info_arr[i];
-				break;
-			}
-		}
-
-		report++;
-		len--;
+	if( itf_protocol == HID_ITF_PROTOCOL_MOUSE ) {
+		process_mouse_report( (hid_mouse_report_t const*) report );
 	}
-
-	if( !rpt_info ) {
-		#if DEBUG_UART_ON
-			printf( "-- rpt_info == NULL\n" );
-		#endif
-		return;
-	}
-
-	#if DEBUG_UART_ON
-		printf( "-- rpt_info->usage_page == %d\n", rpt_info->usage_page );
-		printf( "-- rpt_info->usage == %d\n", rpt_info->usage );
-	#endif
-	if( rpt_info->usage_page == HID_USAGE_PAGE_DESKTOP ) {
-		//if( rpt_info->usage == HID_USAGE_DESKTOP_GAMEPAD ) {
+	else {
+		// Generic report requires matching ReportID and contents with previous parsed report info
 		//	process_gamepad_report( (hid_gamepad_report_t const*) report );
-		//}
-		//else if( rpt_info->usage == HID_USAGE_DESKTOP_JOYSTICK ) {
-		//	process_joystick_report( (my_hid_joystick_report_t const*) report );
-		//}
-		//else 
-		if( rpt_info->usage == HID_USAGE_DESKTOP_MOUSE ) {
-			process_mouse_report( (hid_mouse_report_t const*) report );
-		}
+	}
+
+	// continue to request to receive report
+	if( !tuh_hid_receive_report( dev_addr, instance ) ) {
+		#if DEBUG_ON
+			printf( "Error: cannot request to receive report\r\n" );
+		#endif
 	}
 }

@@ -30,14 +30,14 @@
 
 using namespace std;
 
-#include "pico/stdlib.h"
-#include "pico/multicore.h"
-#include "bsp/board.h"
-#include "pico/time.h"
-#include "hardware/gpio.h"
-#include "tusb.h"
+#include <pico/stdlib.h>
+#include <pico/multicore.h>
+#include <bsp/board.h>
+#include <pico/time.h>
+#include <tusb.h>
 #include "tft_driver.h"
 #include "usb_host_driver.h"
+#include "ps2dev_driver.h"
 
 #define IMAGE_WIDTH		240
 #define IMAGE_HEIGHT	135
@@ -52,6 +52,7 @@ static uint16_t buffer2[ IMAGE_SIZE ];
 #include "resource/grp_red_led.h"
 #include "resource/grp_led.h"
 #include "resource/grp_mouse.h"
+#include "resource/grp_font.h"
 
 // --------------------------------------------------------------------
 static void response_core( void ) {
@@ -60,6 +61,8 @@ static void response_core( void ) {
 	int32_t button;
 	uint16_t *p_draw_buffer;
 	int mouse_x = 240 / 2, mouse_y = 135 / 2;
+	static char s_buffer[31] = {};
+	uint8_t data;
 
 	tft_init();
 	p_draw_buffer = buffer1;
@@ -100,6 +103,11 @@ static void response_core( void ) {
 			tft_copy( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, mouse_x, mouse_y, grp_mouse, grp_mouse_width, grp_mouse_height, 0, 0, grp_mouse_width, grp_mouse_height );
 		}
 
+		if( ps2dev_get_receive_data( &data ) ) {
+			sprintf( s_buffer, "PS/2 DATA 0x%02X", data );
+		}
+		tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, 0, 0, 0xFFFF, grp_font, s_buffer );
+
 		tft_send_framebuffer( p_draw_buffer );
 		if( p_draw_buffer == buffer1 ) {
 			p_draw_buffer = buffer2;
@@ -114,15 +122,14 @@ static void response_core( void ) {
 int main( void ) {
 
 	board_init();
+	ps2dev_init();
 
 	multicore_launch_core1( response_core );
-
-	gpio_init( 25 );				//	★ 
-	gpio_set_dir( 25, GPIO_OUT );	//	★ 
 
 	tusb_init();
 	for( ;; ) {
 		tuh_task();
+		ps2dev_task();
 	}
 	return 0;
 }
