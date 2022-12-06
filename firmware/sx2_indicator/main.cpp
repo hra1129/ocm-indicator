@@ -59,9 +59,13 @@ enum {
 	PS2_RESET_RECEIVED,
 	PS2_SEND_SELFTEST_COMPLETE,
 	PS2_SEND_MOUSE_ID,
-	PS2_RECEIVE_SAMPLE_RATE,
-	PS2_SAMPLE_RATE_RECEIVED,
-	PS2_TEST,
+	PS2_SEND_ACK,
+	PS2_SEND_ACK_WITH_ID,
+	PS2_SEND_ACK_WITH_PACKET,
+	PS2_SEND_1ST_BYTE,
+	PS2_SEND_2ND_BYTE,
+	PS2_SEND_3RD_BYTE,
+	PS2_SEND_4TH_BYTE,
 };
 static int ps2state = PS2_IDLE;
 
@@ -96,21 +100,6 @@ static void response_core( void ) {
 		}
 
 		if( is_mouse_active() ) {
-			get_mouse_position( &delta_x, &delta_y, &button );
-			mouse_x += delta_x;
-			mouse_y += delta_y;
-			if( mouse_x < 0 ) {
-				mouse_x = 0;
-			}
-			else if( mouse_x > 240 ) {
-				mouse_x = 240;
-			}
-			if( mouse_y < 0 ) {
-				mouse_y = 0;
-			}
-			else if( mouse_y > 135 ) {
-				mouse_y = 135;
-			}
 			tft_copy( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, mouse_x, mouse_y, grp_mouse, grp_mouse_width, grp_mouse_height, 0, 0, grp_mouse_width, grp_mouse_height );
 		}
 
@@ -121,8 +110,29 @@ static void response_core( void ) {
 					sprintf( s_buffer, "RECEIVE PS/2 RESET CMD." );
 					ps2state++;
 				}
-				else {
-					sprintf( s_buffer, "RECEIVE PS/2 INVALID CMD 0x%02X.", data );
+				else if( data == 0xF3 ) {
+					sprintf( s_buffer, "RECEIVE PS/2 SAMPLE RATE." );
+					ps2state = PS2_SEND_ACK;
+				}
+				else if( data == 0xC8 ) {
+					sprintf( s_buffer, "RECEIVE PS/2 DECIMAL 200." );
+					ps2state = PS2_SEND_ACK;
+				}
+				else if( data == 0x64 ) {
+					sprintf( s_buffer, "RECEIVE PS/2 DECIMAL 100." );
+					ps2state = PS2_SEND_ACK;
+				}
+				else if( data == 0x50 ) {
+					sprintf( s_buffer, "RECEIVE PS/2 DECIMAL 80." );
+					ps2state = PS2_SEND_ACK;
+				}
+				else if( data == 0xF2 ) {
+					sprintf( s_buffer, "RECEIVE PS/2 READ DEVICE TYPE." );
+					ps2state = PS2_SEND_ACK_WITH_ID;
+				}
+				else if( data == 0xF4 ) {
+					sprintf( s_buffer, "RECEIVE PS/2 ENABLE DATA REPO." );
+					ps2state = PS2_SEND_ACK_WITH_PACKET;
 				}
 			}
 			break;
@@ -147,35 +157,104 @@ static void response_core( void ) {
 		case PS2_SEND_MOUSE_ID:
 			if( ps2dev_send_data( 0x00 ) ) {
 				sprintf( s_buffer, "SEND PS/2 0x00." );
-				ps2state++;
+				ps2state = PS2_IDLE;
 			}
 			else {
 				sprintf( s_buffer, "SENDING PS/2 0x00." );
 			}
 			break;
-		case PS2_RECEIVE_SAMPLE_RATE:
-			if( ps2dev_get_receive_data( &data ) ) {
-				if( data == 0xF3 ) {
-					sprintf( s_buffer, "RECEIVE PS/2 SAMPLE RATE." );
-					ps2state++;
-				}
-				else {
-					sprintf( s_buffer, "RECEIVE PS/2 INVALID CMD 0x%02X.", data );
-				}
-			}
-			break;
-		case PS2_SAMPLE_RATE_RECEIVED:
+		case PS2_SEND_ACK:
 			if( ps2dev_send_data( 0xFA ) ) {
 				sprintf( s_buffer, "SEND PS/2 0xFA." );
-				ps2state++;
+				ps2state = PS2_IDLE;
 			}
 			else {
 				sprintf( s_buffer, "SENDING PS/2 0xFA." );
 			}
 			break;
-		case PS2_TEST:
-			if( ps2dev_get_receive_data( &data ) ) {
-				sprintf( s_buffer, "RECEIVE PS/2 DATA 0x%02X.", data );
+		case PS2_SEND_ACK_WITH_ID:
+			if( ps2dev_send_data( 0xFA ) ) {
+				sprintf( s_buffer, "SEND PS/2 0xFA." );
+				ps2state = PS2_SEND_MOUSE_ID;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 0xFA." );
+			}
+			break;
+		case PS2_SEND_ACK_WITH_PACKET:
+			if( ps2dev_send_data( 0xFA ) ) {
+				sprintf( s_buffer, "SEND PS/2 0xFA." );
+				ps2state = PS2_SEND_1ST_BYTE;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 0xFA." );
+			}
+			break;
+		case PS2_SEND_1ST_BYTE:
+			if( ps2dev_send_data( 0x09 ) ) {
+				sprintf( s_buffer, "SEND PS/2 0x09." );
+				ps2state = PS2_SEND_2ND_BYTE;
+				delta_x = 0;
+				delta_y = 0;
+				if( is_mouse_active() ) {
+					get_mouse_position( &delta_x, &delta_y, &button );
+					mouse_x += delta_x;
+					mouse_y += delta_y;
+					if( mouse_x < 0 ) {
+						mouse_x = 0;
+					}
+					else if( mouse_x > 240 ) {
+						mouse_x = 240;
+					}
+					if( mouse_y < 0 ) {
+						mouse_y = 0;
+					}
+					else if( mouse_y > 135 ) {
+						mouse_y = 135;
+					}
+				}
+				if( delta_x < -128 ) {
+					delta_x = -128;
+				}
+				else if( delta_x > 127 ) {
+					delta_x = 127;
+				}
+				if( delta_y < -128 ) {
+					delta_y = -128;
+				}
+				else if( delta_y > 127 ) {
+					delta_y = 127;
+				}
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 0x09." );
+			}
+			break;
+		case PS2_SEND_2ND_BYTE:
+			if( ps2dev_send_data( delta_x ) ) {
+				sprintf( s_buffer, "SEND PS/2 delta_x." );
+				ps2state = PS2_SEND_3RD_BYTE;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 delta_x." );
+			}
+			break;
+		case PS2_SEND_3RD_BYTE:
+			if( ps2dev_send_data( delta_y ) ) {
+				sprintf( s_buffer, "SEND PS/2 delta_y." );
+				ps2state = PS2_SEND_4TH_BYTE;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 delta_y." );
+			}
+			break;
+		case PS2_SEND_4TH_BYTE:
+			if( ps2dev_send_data( 0 ) ) {
+				sprintf( s_buffer, "SEND PS/2 delta_z." );
+				ps2state = PS2_SEND_1ST_BYTE;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 delta_z." );
 			}
 			break;
 		default:
