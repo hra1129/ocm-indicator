@@ -54,6 +54,17 @@ static uint16_t buffer2[ IMAGE_SIZE ];
 #include "resource/grp_mouse.h"
 #include "resource/grp_font.h"
 
+enum {
+	PS2_IDLE = 0,
+	PS2_RESET_RECEIVED,
+	PS2_SEND_SELFTEST_COMPLETE,
+	PS2_SEND_MOUSE_ID,
+	PS2_RECEIVE_SAMPLE_RATE,
+	PS2_SAMPLE_RATE_RECEIVED,
+	PS2_TEST,
+};
+static int ps2state = PS2_IDLE;
+
 // --------------------------------------------------------------------
 static void response_core( void ) {
 	int y = 0;
@@ -103,8 +114,72 @@ static void response_core( void ) {
 			tft_copy( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, mouse_x, mouse_y, grp_mouse, grp_mouse_width, grp_mouse_height, 0, 0, grp_mouse_width, grp_mouse_height );
 		}
 
-		if( ps2dev_get_receive_data( &data ) ) {
-			sprintf( s_buffer, "PS/2 DATA 0x%02X", data );
+		switch( ps2state ) {
+		case PS2_IDLE:
+			if( ps2dev_get_receive_data( &data ) ) {
+				if( data == 0xFF ) {
+					sprintf( s_buffer, "RECEIVE PS/2 RESET CMD." );
+					ps2state++;
+				}
+				else {
+					sprintf( s_buffer, "RECEIVE PS/2 INVALID CMD 0x%02X.", data );
+				}
+			}
+			break;
+		case PS2_RESET_RECEIVED:
+			if( ps2dev_send_data( 0xFA ) ) {
+				sprintf( s_buffer, "SEND PS/2 0xFA." );
+				ps2state++;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 0xFA." );
+			}
+			break;
+		case PS2_SEND_SELFTEST_COMPLETE:
+			if( ps2dev_send_data( 0xAA ) ) {
+				sprintf( s_buffer, "SEND PS/2 0xAA." );
+				ps2state++;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 0xAA." );
+			}
+			break;
+		case PS2_SEND_MOUSE_ID:
+			if( ps2dev_send_data( 0x00 ) ) {
+				sprintf( s_buffer, "SEND PS/2 0x00." );
+				ps2state++;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 0x00." );
+			}
+			break;
+		case PS2_RECEIVE_SAMPLE_RATE:
+			if( ps2dev_get_receive_data( &data ) ) {
+				if( data == 0xF3 ) {
+					sprintf( s_buffer, "RECEIVE PS/2 SAMPLE RATE." );
+					ps2state++;
+				}
+				else {
+					sprintf( s_buffer, "RECEIVE PS/2 INVALID CMD 0x%02X.", data );
+				}
+			}
+			break;
+		case PS2_SAMPLE_RATE_RECEIVED:
+			if( ps2dev_send_data( 0xFA ) ) {
+				sprintf( s_buffer, "SEND PS/2 0xFA." );
+				ps2state++;
+			}
+			else {
+				sprintf( s_buffer, "SENDING PS/2 0xFA." );
+			}
+			break;
+		case PS2_TEST:
+			if( ps2dev_get_receive_data( &data ) ) {
+				sprintf( s_buffer, "RECEIVE PS/2 DATA 0x%02X.", data );
+			}
+			break;
+		default:
+			break;
 		}
 		tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, 0, 0, 0xFFFF, grp_font, s_buffer );
 

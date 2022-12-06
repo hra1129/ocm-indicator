@@ -87,8 +87,6 @@ Discarded input sections
  .bss           0x00000000        0x0 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .text._Z33ps2dev_check_receive_buffer_emptyv
                 0x00000000       0x1c CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
- .text._Z16ps2dev_send_datah
-                0x00000000        0x4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .text          0x00000000        0x0 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
  .data          0x00000000        0x0 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
  .bss           0x00000000        0x0 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
@@ -270,8 +268,6 @@ Discarded input sections
                 0x00000000       0x8c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .text.alarm_pool_dump
                 0x00000000       0x34 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
- .text.sleep_us
-                0x00000000       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .rodata.at_the_end_of_time
                 0x00000000        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .rodata.nil_time
@@ -1203,9 +1199,9 @@ Discarded input sections
                 0x00000000       0x50 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .text.board_getchar
                 0x00000000        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
- .text          0x00000000        0x0 C:\Users\hra\AppData\Local\Temp\ccmTWGfW.o
- .data          0x00000000        0x0 C:\Users\hra\AppData\Local\Temp\ccmTWGfW.o
- .bss           0x00000000        0x0 C:\Users\hra\AppData\Local\Temp\ccmTWGfW.o
+ .text          0x00000000        0x0 C:\Users\hra\AppData\Local\Temp\cciiXoEy.o
+ .data          0x00000000        0x0 C:\Users\hra\AppData\Local\Temp\cciiXoEy.o
+ .bss           0x00000000        0x0 C:\Users\hra\AppData\Local\Temp\cciiXoEy.o
  .data          0x00000000        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp\libgcc.a(_dvmd_tls.o)
  .bss           0x00000000        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp\libgcc.a(_dvmd_tls.o)
  .text          0x00000000        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-calloc.o)
@@ -1414,11 +1410,11 @@ LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-
 .boot2          0x10000000      0x100
                 0x10000000                __boot2_start__ = .
  *(.boot2)
- .boot2         0x10000000      0x100 C:\Users\hra\AppData\Local\Temp\ccmTWGfW.o
+ .boot2         0x10000000      0x100 C:\Users\hra\AppData\Local\Temp\cciiXoEy.o
                 0x10000100                __boot2_end__ = .
                 0x00000001                ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
-.text           0x10000100     0x84d0
+.text           0x10000100     0x87b8
                 0x10000100                __logical_binary_start = .
  *(.vectors)
  .vectors       0x10000100       0xd4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
@@ -1481,539 +1477,545 @@ LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-
  *(EXCLUDE_FILE(*libm.a: *libc.a:*lib_a-mem*.o *libgcc.a:) .text*)
  .text          0x100002c4       0x48 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
  .text._ZL13response_corev
-                0x1000030c      0x210 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x1000030c      0x310 CMakeFiles/sx2_indicator.dir/main.cpp.obj
  .text.startup.main
-                0x1000051c       0x28 CMakeFiles/sx2_indicator.dir/main.cpp.obj
-                0x1000051c                main
+                0x1000061c       0x28 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x1000061c                main
  .text._Z8tft_initv
-                0x10000544      0xc38 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
-                0x10000544                tft_init()
+                0x10000644      0xc38 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
+                0x10000644                tft_init()
  .text._Z20tft_send_framebufferPKt
-                0x1000117c      0x2f0 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
-                0x1000117c                tft_send_framebuffer(unsigned short const*)
+                0x1000127c      0x2f0 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
+                0x1000127c                tft_send_framebuffer(unsigned short const*)
  .text._Z8tft_copyPtiiiiPKtiiiiii
-                0x1000146c      0x140 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
-                0x1000146c                tft_copy(unsigned short*, int, int, int, int, unsigned short const*, int, int, int, int, int, int)
+                0x1000156c      0x140 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
+                0x1000156c                tft_copy(unsigned short*, int, int, int, int, unsigned short const*, int, int, int, int, int, int)
  .text._Z8tft_putsPtiiiitPKhPKc
-                0x100015ac      0x16c CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
-                0x100015ac                tft_puts(unsigned short*, int, int, int, int, unsigned short, unsigned char const*, char const*)
+                0x100016ac      0x16c CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
+                0x100016ac                tft_puts(unsigned short*, int, int, int, int, unsigned short, unsigned char const*, char const*)
  .text._Z11ps2dev_initv
-                0x10001718       0x64 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
-                0x10001718                ps2dev_init()
+                0x10001818       0x64 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x10001818                ps2dev_init()
  .text._Z11ps2dev_taskv
-                0x1000177c      0x23c CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
-                0x1000177c                ps2dev_task()
+                0x1000187c      0x3a4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x1000187c                ps2dev_task()
  .text._Z23ps2dev_get_receive_dataPh
-                0x100019b8       0x50 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
-                0x100019b8                ps2dev_get_receive_data(unsigned char*)
+                0x10001c20       0x50 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x10001c20                ps2dev_get_receive_data(unsigned char*)
+ .text._Z16ps2dev_send_datah
+                0x10001c70       0x50 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x10001c70                ps2dev_send_data(unsigned char)
  .text.is_mouse_active
-                0x10001a08       0x14 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
-                0x10001a08                is_mouse_active
+                0x10001cc0       0x14 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x10001cc0                is_mouse_active
  .text.get_mouse_position
-                0x10001a1c       0x40 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
-                0x10001a1c                get_mouse_position
+                0x10001cd4       0x40 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x10001cd4                get_mouse_position
  .text.tuh_hid_mount_cb
-                0x10001a5c       0x90 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
-                0x10001a5c                tuh_hid_mount_cb
+                0x10001d14       0x90 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x10001d14                tuh_hid_mount_cb
  .text.tuh_hid_umount_cb
-                0x10001aec        0xc CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
-                0x10001aec                tuh_hid_umount_cb
+                0x10001da4        0xc CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x10001da4                tuh_hid_umount_cb
  .text.tuh_hid_report_received_cb
-                0x10001af8       0x98 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
-                0x10001af8                tuh_hid_report_received_cb
+                0x10001db0       0x98 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x10001db0                tuh_hid_report_received_cb
  .text.gpio_set_function
-                0x10001b90       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
-                0x10001b90                gpio_set_function
+                0x10001e48       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+                0x10001e48                gpio_set_function
  .text.gpio_set_pulls
-                0x10001bc0       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
-                0x10001bc0                gpio_set_pulls
+                0x10001e78       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+                0x10001e78                gpio_set_pulls
  .text.gpio_init
-                0x10001bf0       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
-                0x10001bf0                gpio_init
+                0x10001ea8       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj
+                0x10001ea8                gpio_init
  .text.hw_claim_or_assert
-                0x10001c2c       0x44 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
-                0x10001c2c                hw_claim_or_assert
+                0x10001ee4       0x44 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+                0x10001ee4                hw_claim_or_assert
  .text.hw_claim_unused_from_range
-                0x10001c70       0x9c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
-                0x10001c70                hw_claim_unused_from_range
+                0x10001f28       0x9c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj
+                0x10001f28                hw_claim_unused_from_range
  .text.running_on_fpga
-                0x10001d0c       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
-                0x10001d0c                running_on_fpga
+                0x10001fc4       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_platform/platform.c.obj
+                0x10001fc4                running_on_fpga
  .text.spin_locks_reset
-                0x10001d1c       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
-                0x10001d1c                spin_locks_reset
+                0x10001fd4       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x10001fd4                spin_locks_reset
  .text.next_striped_spin_lock_num
-                0x10001d38       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
-                0x10001d38                next_striped_spin_lock_num
+                0x10001ff0       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x10001ff0                next_striped_spin_lock_num
  .text.spin_lock_claim_unused
-                0x10001d50       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
-                0x10001d50                spin_lock_claim_unused
+                0x10002008       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x10002008                spin_lock_claim_unused
  .text.irq_set_enabled
-                0x10001d70       0x24 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10001d70                irq_set_enabled
+                0x10002028       0x24 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10002028                irq_set_enabled
  .text.irq_is_enabled
-                0x10001d94       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10001d94                irq_is_enabled
+                0x1000204c       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x1000204c                irq_is_enabled
  .text.irq_get_vtable_handler
-                0x10001dac       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10001dac                irq_get_vtable_handler
+                0x10002064       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10002064                irq_get_vtable_handler
  .text.irq_set_exclusive_handler
-                0x10001dbc       0x54 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10001dbc                irq_set_exclusive_handler
+                0x10002074       0x54 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10002074                irq_set_exclusive_handler
  .text.irq_add_shared_handler
-                0x10001e10      0x1e4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10001e10                irq_add_shared_handler
+                0x100020c8      0x1e4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x100020c8                irq_add_shared_handler
  .text.irq_remove_handler
-                0x10001ff4      0x1b4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x10001ff4                irq_remove_handler
+                0x100022ac      0x1b4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x100022ac                irq_remove_handler
  .text.irq_add_tail_to_free_list
-                0x100021a8       0xb4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x100021a8                irq_add_tail_to_free_list
+                0x10002460       0xb4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10002460                irq_add_tail_to_free_list
  .text.irq_init_priorities
-                0x1000225c       0x24 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
-                0x1000225c                irq_init_priorities
+                0x10002514       0x24 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x10002514                irq_init_priorities
  .text.sem_init
-                0x10002280       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/sem.c.obj
-                0x10002280                sem_init
+                0x10002538       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/sem.c.obj
+                0x10002538                sem_init
  .text.lock_init
-                0x100022a0       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/lock_core.c.obj
-                0x100022a0                lock_init
+                0x10002558       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/lock_core.c.obj
+                0x10002558                lock_init
  .text.timer_pool_entry_comparator
-                0x100022b0       0x34 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
-                0x100022b0                timer_pool_entry_comparator
+                0x10002568       0x34 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x10002568                timer_pool_entry_comparator
  .text.sleep_until_callback
-                0x100022e4       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x1000259c       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .text.add_alarm_under_lock.isra.0
-                0x10002314      0x100 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x100025cc      0x100 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .text.alarm_pool_alarm_callback
-                0x10002414      0x1c8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x100026cc      0x1c8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .text.alarm_pool_add_alarm_at.constprop.0
-                0x100025dc      0x11c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x10002894      0x11c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .text.alarm_pool_init_default
-                0x100026f8       0x64 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
-                0x100026f8                alarm_pool_init_default
+                0x100029b0       0x64 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x100029b0                alarm_pool_init_default
  .text.sleep_until
-                0x1000275c       0xac CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
-                0x1000275c                sleep_until
+                0x10002a14       0xac CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x10002a14                sleep_until
+ .text.sleep_us
+                0x10002ac0       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x10002ac0                sleep_us
  .text.sleep_ms
-                0x10002808       0x38 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
-                0x10002808                sleep_ms
+                0x10002af0       0x38 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x10002af0                sleep_ms
  .text.best_effort_wfe_or_timeout
-                0x10002840       0xd4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
-                0x10002840                best_effort_wfe_or_timeout
+                0x10002b28       0xd4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x10002b28                best_effort_wfe_or_timeout
  .text.hardware_alarm_irq_handler
-                0x10002914       0xb8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10002bfc       0xb8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  .text.hardware_alarm_claim
-                0x100029cc       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x100029cc                hardware_alarm_claim
+                0x10002cb4       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10002cb4                hardware_alarm_claim
  .text.time_us_64
-                0x100029e4       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x100029e4                time_us_64
+                0x10002ccc       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10002ccc                time_us_64
  .text.busy_wait_until
-                0x100029f8       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x100029f8                busy_wait_until
+                0x10002ce0       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10002ce0                busy_wait_until
  .text.hardware_alarm_set_callback
-                0x10002a18       0x8c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10002a18                hardware_alarm_set_callback
+                0x10002d00       0x8c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10002d00                hardware_alarm_set_callback
  .text.hardware_alarm_set_target
-                0x10002aa4       0xe0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10002aa4                hardware_alarm_set_target
+                0x10002d8c       0xe0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10002d8c                hardware_alarm_set_target
  .text.hardware_alarm_cancel
-                0x10002b84       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
-                0x10002b84                hardware_alarm_cancel
+                0x10002e6c       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x10002e6c                hardware_alarm_cancel
  .text.ph_merge_nodes
-                0x10002bc0       0x68 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10002ea8       0x68 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
  .text.ph_post_alloc_init
-                0x10002c28       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
-                0x10002c28                ph_post_alloc_init
+                0x10002f10       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10002f10                ph_post_alloc_init
  .text.ph_merge_two_pass
-                0x10002c64       0x90 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
-                0x10002c64                ph_merge_two_pass
+                0x10002f4c       0x90 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10002f4c                ph_merge_two_pass
  .text.ph_remove_any_head
-                0x10002cf4       0xf8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x10002fdc       0xf8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
  .text.ph_remove_head
-                0x10002dec       0xfc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
-                0x10002dec                ph_remove_head
+                0x100030d4       0xfc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x100030d4                ph_remove_head
  .text.ph_remove_and_free_node
-                0x10002ee8       0x7c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
-                0x10002ee8                ph_remove_and_free_node
+                0x100031d0       0x7c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_util/pheap.c.obj
+                0x100031d0                ph_remove_and_free_node
  .text.mutex_init
-                0x10002f64       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/mutex.c.obj
-                0x10002f64                mutex_init
+                0x1000324c       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/mutex.c.obj
+                0x1000324c                mutex_init
  .text.recursive_mutex_init
-                0x10002f80       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/mutex.c.obj
-                0x10002f80                recursive_mutex_init
+                0x10003268       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/mutex.c.obj
+                0x10003268                recursive_mutex_init
  .text.critical_section_init
-                0x10002f9c       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/critical_section.c.obj
-                0x10002f9c                critical_section_init
+                0x10003284       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_sync/critical_section.c.obj
+                0x10003284                critical_section_init
  .text.uart_init
-                0x10002fbc       0xe0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
-                0x10002fbc                uart_init
+                0x100032a4       0xe0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+                0x100032a4                uart_init
  .text.runtime_init
-                0x1000309c       0xf0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x1000309c                runtime_init
- .text.exit     0x1000318c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x1000318c                exit
- .text.panic    0x10003190       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x10003190                panic
+                0x10003384       0xf0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10003384                runtime_init
+ .text.exit     0x10003474        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10003474                exit
+ .text.panic    0x10003478       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x10003478                panic
  .text.hard_assertion_failure
-                0x100031c0        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
-                0x100031c0                hard_assertion_failure
+                0x100034a8        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x100034a8                hard_assertion_failure
  .text.clocks_init
-                0x100031cc      0x2bc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
-                0x100031cc                clocks_init
+                0x100034b4      0x2bc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+                0x100034b4                clocks_init
  .text.clock_get_hz
-                0x10003488        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
-                0x10003488                clock_get_hz
+                0x10003770        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+                0x10003770                clock_get_hz
  .text.pll_init
-                0x10003494       0xb0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
-                0x10003494                pll_init
+                0x1000377c       0xb0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj
+                0x1000377c                pll_init
  .text.watchdog_start_tick
-                0x10003544       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
-                0x10003544                watchdog_start_tick
+                0x1000382c       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.obj
+                0x1000382c                watchdog_start_tick
  .text.xosc_init
-                0x10003554       0x28 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
-                0x10003554                xosc_init
+                0x1000383c       0x28 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj
+                0x1000383c                xosc_init
  .text._out_buffer
-                0x1000357c        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10003864        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text._out_null
-                0x10003584        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x1000386c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text._out_rev
-                0x10003588       0x9c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10003870       0x9c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text._ntoa_format
-                0x10003624      0x1cc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x1000390c      0x1cc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text._out_char
-                0x100037f0       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._etoa    0x10003800      0x44c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- .text._ftoa    0x10003c4c      0x398 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10003ad8       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._etoa    0x10003ae8      0x44c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ .text._ftoa    0x10003f34      0x398 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text._vsnprintf
-                0x10003fe4      0xb04 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x100042cc      0xb04 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .text.__wrap_sprintf
-                0x10004ae8       0x28 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
-                0x10004ae8                __wrap_sprintf
+                0x10004dd0       0x28 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10004dd0                __wrap_sprintf
  .text.weak_raw_vprintf
-                0x10004b10       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
-                0x10004b10                weak_raw_vprintf
- .text          0x10004b40       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
+                0x10004df8       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x10004df8                weak_raw_vprintf
+ .text          0x10004e28       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj
  .text.rom_func_lookup
-                0x10004b50       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
-                0x10004b50                rom_func_lookup
+                0x10004e38       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+                0x10004e38                rom_func_lookup
  .text.rom_data_lookup
-                0x10004b60       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
-                0x10004b60                rom_data_lookup
+                0x10004e48       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+                0x10004e48                rom_data_lookup
  .text.rom_funcs_lookup
-                0x10004b70       0x44 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
-                0x10004b70                rom_funcs_lookup
+                0x10004e58       0x44 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj
+                0x10004e58                rom_funcs_lookup
  .text.__wrap___aeabi_idiv
-                0x10004bb4       0x50 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
-                0x10004bb4                __wrap___aeabi_idivmod
-                0x10004bb4                divmod_s32s32
-                0x10004bb4                div_s32s32
-                0x10004bb4                __wrap___aeabi_idiv
-                0x10004bbc                divmod_s32s32_unsafe
-                0x10004be8                divmod_s32s32_savestate
+                0x10004e9c       0x50 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+                0x10004e9c                __wrap___aeabi_idivmod
+                0x10004e9c                divmod_s32s32
+                0x10004e9c                div_s32s32
+                0x10004e9c                __wrap___aeabi_idiv
+                0x10004ea4                divmod_s32s32_unsafe
+                0x10004ed0                divmod_s32s32_savestate
  .text.__wrap___aeabi_uidiv
-                0x10004c04       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
-                0x10004c04                __wrap___aeabi_uidiv
-                0x10004c04                __wrap___aeabi_uidivmod
-                0x10004c04                div_u32u32
-                0x10004c04                divmod_u32u32
-                0x10004c0c                divmod_u32u32_unsafe
-                0x10004c34                divmod_u32u32_savestate
+                0x10004eec       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+                0x10004eec                __wrap___aeabi_uidiv
+                0x10004eec                __wrap___aeabi_uidivmod
+                0x10004eec                div_u32u32
+                0x10004eec                divmod_u32u32
+                0x10004ef4                divmod_u32u32_unsafe
+                0x10004f1c                divmod_u32u32_savestate
  .text.__wrap___aeabi_ldiv
-                0x10004c50      0x434 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
-                0x10004c50                div_s64s64
-                0x10004c50                divmod_s64s64
-                0x10004c50                __wrap___aeabi_ldivmod
-                0x10004c88                divmod_u64u64
-                0x10004c88                div_u64u64
-                0x10004c88                __wrap___aeabi_uldivmod
-                0x10004c98                divmod_u64u64_savestate
-                0x10004cc0                divmod_s64s64_unsafe
-                0x10004d48                divmod_u64u64_unsafe
+                0x10004f38      0x434 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_divider/divider.S.obj
+                0x10004f38                div_s64s64
+                0x10004f38                divmod_s64s64
+                0x10004f38                __wrap___aeabi_ldivmod
+                0x10004f70                divmod_u64u64
+                0x10004f70                div_u64u64
+                0x10004f70                __wrap___aeabi_uldivmod
+                0x10004f80                divmod_u64u64_savestate
+                0x10004fa8                divmod_s64s64_unsafe
+                0x10005030                divmod_u64u64_unsafe
  .text.__wrap___aeabi_darithmetic
-                0x10005084       0x80 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10005084                __wrap___aeabi_drsub
-                0x1000508a                __wrap___aeabi_dsub
-                0x1000509c                __wrap___aeabi_dadd
-                0x100050ae                __wrap___aeabi_ddiv
-                0x100050ea                __wrap___aeabi_dmul
+                0x1000536c       0x80 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x1000536c                __wrap___aeabi_drsub
+                0x10005372                __wrap___aeabi_dsub
+                0x10005384                __wrap___aeabi_dadd
+                0x10005396                __wrap___aeabi_ddiv
+                0x100053d2                __wrap___aeabi_dmul
  .text.__wrap___aeabi_cdcmple
-                0x10005104       0x6c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10005104                __wrap___aeabi_cdrcmple
-                0x10005114                __wrap___aeabi_cdcmpeq
-                0x10005114                __wrap___aeabi_cdcmple
+                0x100053ec       0x6c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x100053ec                __wrap___aeabi_cdrcmple
+                0x100053fc                __wrap___aeabi_cdcmpeq
+                0x100053fc                __wrap___aeabi_cdcmple
  .text.__wrap___aeabi_dcmplt
-                0x10005170        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10005170                __wrap___aeabi_dcmplt
+                0x10005458        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x10005458                __wrap___aeabi_dcmplt
  .text.__wrap___aeabi_dcmple
-                0x1000517c       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x1000517c                __wrap___aeabi_dcmple
+                0x10005464       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x10005464                __wrap___aeabi_dcmple
  .text.__wrap___aeabi_dcmpge
-                0x1000518c       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x1000518c                __wrap___aeabi_dcmpge
+                0x10005474       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x10005474                __wrap___aeabi_dcmpge
  .text.__wrap___aeabi_dcmpgt
-                0x1000519c        0xa CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x1000519c                __wrap___aeabi_dcmpgt
+                0x10005484        0xa CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x10005484                __wrap___aeabi_dcmpgt
  .text.__wrap___aeabi_dcmpun
-                0x100051a6       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x100051a6                __wrap___aeabi_dcmpun
- *fill*         0x100051c2        0x2 
+                0x1000548e       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x1000548e                __wrap___aeabi_dcmpun
+ *fill*         0x100054aa        0x2 
  .text.__wrap___aeabi_i2d
-                0x100051c4       0x38 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x100051c4                __wrap___aeabi_ui2d
-                0x100051cc                __wrap___aeabi_i2d
+                0x100054ac       0x38 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x100054ac                __wrap___aeabi_ui2d
+                0x100054b4                __wrap___aeabi_i2d
  .text.__wrap___aeabi_d2iz
-                0x100051fc       0x48 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x100051fc                double2int_z
-                0x100051fc                __wrap___aeabi_d2iz
+                0x100054e4       0x48 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x100054e4                double2int_z
+                0x100054e4                __wrap___aeabi_d2iz
  .text.__wrap___aeabi_d2uiz
-                0x10005244       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
-                0x10005244                __wrap___aeabi_d2uiz
-                0x10005244                double2uint
+                0x1000552c       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_aeabi.S.obj
+                0x1000552c                __wrap___aeabi_d2uiz
+                0x1000552c                double2uint
  .text.__aeabi_double_init
-                0x1000525c       0x94 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
-                0x1000525c                __aeabi_double_init
+                0x10005544       0x94 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+                0x10005544                __aeabi_double_init
  .text.double_table_shim_on_use_helper
-                0x100052f0       0x2c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x100052f0                double_table_shim_on_use_helper
+                0x100055d8       0x2c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x100055d8                double_table_shim_on_use_helper
  .text.__wrap___aeabi_dsub
-                0x1000531c       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x1000531c                drsub_shim
-                0x10005322                dsub_shim
+                0x10005604       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x10005604                drsub_shim
+                0x1000560a                dsub_shim
  .text.dadd_shim
-                0x1000532c      0x15c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x1000532c                dadd_shim
+                0x10005614      0x15c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x10005614                dadd_shim
  .text.dmul_shim
-                0x10005488      0x15c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x10005488                dmul_shim
+                0x10005770      0x15c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x10005770                dmul_shim
  .text.ddiv_shim
-                0x100055e4      0x1b0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x100055e4                ddiv_shim
+                0x100058cc      0x1b0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x100058cc                ddiv_shim
  .text.double2uint_shim
-                0x10005794        0xe CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x10005794                double2uint_shim
-                0x10005796                double2ufix_shim
- *fill*         0x100057a2        0x2 
+                0x10005a7c        0xe CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x10005a7c                double2uint_shim
+                0x10005a7e                double2ufix_shim
+ *fill*         0x10005a8a        0x2 
  .text.double2uint64_shim
-                0x100057a4       0x70 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x100057a4                double2uint64_shim
-                0x100057a6                double2ufix64_shim
-                0x100057c6                d2fix_a
+                0x10005a8c       0x70 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x10005a8c                double2uint64_shim
+                0x10005a8e                double2ufix64_shim
+                0x10005aae                d2fix_a
  .text.dunpacks
-                0x10005814       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
-                0x10005814                dunpacks
+                0x10005afc       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
+                0x10005afc                dunpacks
  .text.__aeabi_lmul
-                0x10005850       0x32 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
-                0x10005850                __wrap___aeabi_lmul
- *fill*         0x10005882        0x2 
+                0x10005b38       0x32 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S.obj
+                0x10005b38                __wrap___aeabi_lmul
+ *fill*         0x10005b6a        0x2 
  .text.__aeabi_float_init
-                0x10005884       0x64 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
-                0x10005884                __aeabi_float_init
+                0x10005b6c       0x64 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
+                0x10005b6c                __aeabi_float_init
  .text.float_table_shim_on_use_helper
-                0x100058e8       0x2c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
-                0x100058e8                float_table_shim_on_use_helper
- .text          0x10005914       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
-                0x10005914                __aeabi_mem_init
- .text.memset   0x10005924        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
-                0x10005924                __wrap_memset
- .text.memcpy   0x10005930        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
-                0x10005930                __wrap_memcpy
-                0x10005930                __wrap___aeabi_memcpy
+                0x10005bd0       0x2c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S.obj
+                0x10005bd0                float_table_shim_on_use_helper
+ .text          0x10005bfc       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+                0x10005bfc                __aeabi_mem_init
+ .text.memset   0x10005c0c        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+                0x10005c0c                __wrap_memset
+ .text.memcpy   0x10005c18        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S.obj
+                0x10005c18                __wrap_memcpy
+                0x10005c18                __wrap___aeabi_memcpy
  .text.stdio_out_chars_no_crlf
-                0x1000593c       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10005c24       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdio_out_chars_crlf
-                0x1000594c       0xb4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10005c34       0xb4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.stdio_put_string.isra.0
-                0x10005a00       0xfc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10005ce8       0xfc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
  .text.__wrap_putchar
-                0x10005afc       0xa0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
-                0x10005afc                __wrap_putchar
+                0x10005de4       0xa0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10005de4                __wrap_putchar
  .text.__wrap_puts
-                0x10005b9c       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
-                0x10005b9c                __wrap_puts
+                0x10005e84       0x3c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10005e84                __wrap_puts
  .text.stdio_set_driver_enabled
-                0x10005bd8       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
-                0x10005bd8                stdio_set_driver_enabled
+                0x10005ec0       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+                0x10005ec0                stdio_set_driver_enabled
  .text.stdio_uart_out_chars
-                0x10005c08       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x10005ef0       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
  .text.stdio_uart_in_chars
-                0x10005c54       0x38 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
-                0x10005c54                stdio_uart_in_chars
+                0x10005f3c       0x38 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x10005f3c                stdio_uart_in_chars
  .text.stdio_uart_init_full
-                0x10005c8c       0x38 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
-                0x10005c8c                stdio_uart_init_full
+                0x10005f74       0x38 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+                0x10005f74                stdio_uart_init_full
  .text.spi_init
-                0x10005cc4       0xf8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
-                0x10005cc4                spi_init
+                0x10005fac       0xf8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_spi/spi.c.obj
+                0x10005fac                spi_init
  .text.dma_claim_unused_channel
-                0x10005dbc       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
-                0x10005dbc                dma_claim_unused_channel
+                0x100060a4       0x20 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+                0x100060a4                dma_claim_unused_channel
  .text.core1_trampoline
-                0x10005ddc        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x100060c4        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
  .text.core1_wrapper
-                0x10005de0        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
-                0x10005de0                core1_wrapper
+                0x100060c8        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x100060c8                core1_wrapper
  .text.multicore_launch_core1_raw
-                0x10005dec       0x84 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
-                0x10005dec                multicore_launch_core1_raw
+                0x100060d4       0x84 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x100060d4                multicore_launch_core1_raw
  .text.multicore_launch_core1
-                0x10005e70       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
-                0x10005e70                multicore_launch_core1
+                0x10006158       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_multicore/multicore.c.obj
+                0x10006158                multicore_launch_core1
  .text.hcd_rp2040_irq
-                0x10005ebc      0x34c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x100061a4      0x34c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .text.hcd_init
-                0x10006208       0x54 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10006208                hcd_init
+                0x100064f0       0x54 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x100064f0                hcd_init
  .text.hcd_port_reset
-                0x1000625c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x1000625c                hcd_port_reset
+                0x10006544        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10006544                hcd_port_reset
  .text.hcd_port_reset_end
-                0x10006260        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10006260                hcd_port_reset_end
+                0x10006548        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10006548                hcd_port_reset_end
  .text.hcd_port_connect_status
-                0x10006264       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10006264                hcd_port_connect_status
+                0x1000654c       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x1000654c                hcd_port_connect_status
  .text.hcd_port_speed_get
-                0x1000627c       0x24 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x1000627c                hcd_port_speed_get
+                0x10006564       0x24 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10006564                hcd_port_speed_get
  .text.hcd_device_close
-                0x100062a0      0x47c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x100062a0                hcd_device_close
+                0x10006588      0x47c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10006588                hcd_device_close
  .text.hcd_int_enable
-                0x1000671c        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x1000671c                hcd_int_enable
+                0x10006a04        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10006a04                hcd_int_enable
  .text.hcd_edpt_open
-                0x10006728      0x23c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10006728                hcd_edpt_open
+                0x10006a10      0x23c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10006a10                hcd_edpt_open
  .text.hcd_edpt_xfer
-                0x10006964      0x34c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10006964                hcd_edpt_xfer
+                0x10006c4c      0x34c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10006c4c                hcd_edpt_xfer
  .text.hcd_setup_send
-                0x10006cb0       0xa8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
-                0x10006cb0                hcd_setup_send
+                0x10006f98       0xa8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x10006f98                hcd_setup_send
  .text._hw_endpoint_buffer_control_update32.part.0.isra.0
-                0x10006d58       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x10007040       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
  .text.rp2040_usb_init
-                0x10006d74       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x10006d74                rp2040_usb_init
+                0x1000705c       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x1000705c                rp2040_usb_init
  .text.hw_endpoint_reset_transfer
-                0x10006dc0        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x10006dc0                hw_endpoint_reset_transfer
+                0x100070a8        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x100070a8                hw_endpoint_reset_transfer
  .text.hw_endpoint_xfer_start
-                0x10006dcc      0x134 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x10006dcc                hw_endpoint_xfer_start
+                0x100070b4      0x134 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x100070b4                hw_endpoint_xfer_start
  .text.hw_endpoint_xfer_continue
-                0x10006f00      0x1e8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-                0x10006f00                hw_endpoint_xfer_continue
+                0x100071e8      0x1e8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+                0x100071e8                hw_endpoint_xfer_continue
  .text._control_blocking_complete_cb
-                0x100070e8        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x100073d0        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.usbh_control_xfer_cb.constprop.0.isra.0
-                0x100070f0      0x158 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x100073d8      0x158 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.tuh_task_ext.part.0
-                0x10007248      0x23c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007530      0x23c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.tuh_control_xfer.part.0
-                0x10007484       0xd4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x1000776c       0xd4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.process_enumeration
-                0x10007558      0x3b4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007840      0x3b4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .text.tuh_speed_get
-                0x1000790c       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x1000790c                tuh_speed_get
+                0x10007bf4       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007bf4                tuh_speed_get
  .text.tuh_inited
-                0x10007924       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10007924                tuh_inited
+                0x10007c0c       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007c0c                tuh_inited
  .text.tuh_init
-                0x10007938       0xa4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10007938                tuh_init
+                0x10007c20       0xa4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007c20                tuh_init
  .text.tuh_task_ext
-                0x100079dc       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x100079dc                tuh_task_ext
+                0x10007cc4       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007cc4                tuh_task_ext
  .text.tuh_control_xfer
-                0x100079ec       0x2c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x100079ec                tuh_control_xfer
+                0x10007cd4       0x2c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007cd4                tuh_control_xfer
  .text.usbh_get_enum_buf
-                0x10007a18        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10007a18                usbh_get_enum_buf
+                0x10007d00        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007d00                usbh_get_enum_buf
  .text.usbh_edpt_claim
-                0x10007a20       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10007a20                usbh_edpt_claim
+                0x10007d08       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007d08                usbh_edpt_claim
  .text.usbh_edpt_xfer_with_callback
-                0x10007a50       0x58 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10007a50                usbh_edpt_xfer_with_callback
+                0x10007d38       0x58 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007d38                usbh_edpt_xfer_with_callback
  .text.tuh_edpt_open
-                0x10007aa8       0x40 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10007aa8                tuh_edpt_open
+                0x10007d90       0x40 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007d90                tuh_edpt_open
  .text.tuh_descriptor_get_hid_report
-                0x10007ae8       0x68 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10007ae8                tuh_descriptor_get_hid_report
+                0x10007dd0       0x68 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007dd0                tuh_descriptor_get_hid_report
  .text.usbh_driver_set_config_complete
-                0x10007b50       0xb8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x10007b50                usbh_driver_set_config_complete
+                0x10007e38       0xb8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x10007e38                usbh_driver_set_config_complete
  .text.process_set_config
-                0x10007c08      0x1c8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10007ef0      0x1c8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
  .text.tuh_hid_interface_protocol
-                0x10007dd0       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007dd0                tuh_hid_interface_protocol
+                0x100080b8       0x1c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x100080b8                tuh_hid_interface_protocol
  .text.tuh_hid_receive_report
-                0x10007dec       0x64 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007dec                tuh_hid_receive_report
+                0x100080d4       0x64 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x100080d4                tuh_hid_receive_report
  .text.hidh_init
-                0x10007e50       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007e50                hidh_init
+                0x10008138       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10008138                hidh_init
  .text.hidh_xfer_cb
-                0x10007e64       0x80 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007e64                hidh_xfer_cb
+                0x1000814c       0x80 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x1000814c                hidh_xfer_cb
  .text.hidh_close
-                0x10007ee4       0x54 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007ee4                hidh_close
+                0x100081cc       0x54 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x100081cc                hidh_close
  .text.hidh_open
-                0x10007f38      0x118 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10007f38                hidh_open
+                0x10008220      0x118 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10008220                hidh_open
  .text.hidh_set_config
-                0x10008050       0xb0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10008050                hidh_set_config
+                0x10008338       0xb0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x10008338                hidh_set_config
  .text.tuh_hid_parse_report_descriptor
-                0x10008100       0xcc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
-                0x10008100                tuh_hid_parse_report_descriptor
+                0x100083e8       0xcc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+                0x100083e8                tuh_hid_parse_report_descriptor
  .text.tusb_init
-                0x100081cc        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x100081cc                tusb_init
+                0x100084b4        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x100084b4                tusb_init
  .text.tusb_inited
-                0x100081d8        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x100081d8                tusb_inited
+                0x100084c0        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x100084c0                tusb_inited
  .text.tu_edpt_claim
-                0x100081e0       0x50 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x100081e0                tu_edpt_claim
+                0x100084c8       0x50 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x100084c8                tu_edpt_claim
  .text.tu_edpt_validate
-                0x10008230       0x78 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x10008230                tu_edpt_validate
+                0x10008518       0x78 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x10008518                tu_edpt_validate
  .text.tu_edpt_bind_driver
-                0x100082a8       0x34 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x100082a8                tu_edpt_bind_driver
+                0x10008590       0x34 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x10008590                tu_edpt_bind_driver
  .text.tu_desc_get_interface_total_len
-                0x100082dc       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
-                0x100082dc                tu_desc_get_interface_total_len
+                0x100085c4       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
+                0x100085c4                tu_desc_get_interface_total_len
  .text.tu_fifo_read
-                0x10008328       0x9c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-                0x10008328                tu_fifo_read
+                0x10008610       0x9c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+                0x10008610                tu_fifo_read
  .text.tu_fifo_write
-                0x100083c4       0x7c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-                0x100083c4                tu_fifo_write
+                0x100086ac       0x7c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+                0x100086ac                tu_fifo_write
  .text.tu_fifo_clear
-                0x10008440       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-                0x10008440                tu_fifo_clear
+                0x10008728       0x4c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
+                0x10008728                tu_fifo_clear
  .text.board_init
-                0x1000848c       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-                0x1000848c                board_init
+                0x10008774       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x10008774                board_init
  .text.board_led_write
-                0x100084bc       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-                0x100084bc                board_led_write
- .text.strlen   0x100084d0       0x5c c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strlen-stub.o)
-                0x100084d0                strlen
+                0x100087a4       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x100087a4                board_led_write
+ .text.strlen   0x100087b8       0x5c c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-strlen-stub.o)
+                0x100087b8                strlen
  *(.fini)
- .fini          0x1000852c        0x4 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crti.o
-                0x1000852c                _fini
- .fini.__stub   0x10008530       0xa0 linker stubs
+ .fini          0x10008814        0x4 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crti.o
+                0x10008814                _fini
+ .fini.__stub   0x10008818       0xa0 linker stubs
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -2025,138 +2027,140 @@ LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.eh_frame*)
- .eh_frame      0x100085d0        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
-                0x100085d0                . = ALIGN (0x4)
+ .eh_frame      0x100088b8        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
+                0x100088b8                . = ALIGN (0x4)
 
-.glue_7         0x100085d0        0x0
- .glue_7        0x100085d0        0x0 linker stubs
+.glue_7         0x100088b8        0x0
+ .glue_7        0x100088b8        0x0 linker stubs
 
-.glue_7t        0x100085d0        0x0
- .glue_7t       0x100085d0        0x0 linker stubs
+.glue_7t        0x100088b8        0x0
+ .glue_7t       0x100088b8        0x0 linker stubs
 
-.vfp11_veneer   0x100085d0        0x0
- .vfp11_veneer  0x100085d0        0x0 linker stubs
+.vfp11_veneer   0x100088b8        0x0
+ .vfp11_veneer  0x100088b8        0x0 linker stubs
 
-.v4_bx          0x100085d0        0x0
- .v4_bx         0x100085d0        0x0 linker stubs
+.v4_bx          0x100088b8        0x0
+ .v4_bx         0x100088b8        0x0 linker stubs
 
-.iplt           0x100085d0        0x0
- .iplt          0x100085d0        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
+.iplt           0x100088b8        0x0
+ .iplt          0x100088b8        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
 
-.rodata         0x100085d0    0x258cc
+.rodata         0x100088b8    0x25a3c
  *(EXCLUDE_FILE(*libm.a: *libc.a:*lib_a-mem*.o *libgcc.a:) .rodata*)
  .rodata._ZL13response_corev.str1.4
-                0x100085d0       0x11 CMakeFiles/sx2_indicator.dir/main.cpp.obj
- *fill*         0x100085e1        0x3 
+                0x100088b8       0xde CMakeFiles/sx2_indicator.dir/main.cpp.obj
+ *fill*         0x10008996        0x2 
+ .rodata._ZL13response_corev
+                0x10008998       0x1c CMakeFiles/sx2_indicator.dir/main.cpp.obj
  .rodata._ZL13grp_indicator
-                0x100085e4     0xfd20 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x100089b4     0xfd20 CMakeFiles/sx2_indicator.dir/main.cpp.obj
  .rodata._ZL14grp_background
-                0x10018304     0xfd20 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x100186d4     0xfd20 CMakeFiles/sx2_indicator.dir/main.cpp.obj
  .rodata._ZL7grp_msx
-                0x10028024     0x5200 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x100283f4     0x5200 CMakeFiles/sx2_indicator.dir/main.cpp.obj
  .rodata._ZL8grp_font
-                0x1002d224      0x300 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x1002d5f4      0x300 CMakeFiles/sx2_indicator.dir/main.cpp.obj
  .rodata._ZL9grp_mouse
-                0x1002d524      0x4e0 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x1002d8f4      0x4e0 CMakeFiles/sx2_indicator.dir/main.cpp.obj
  .rodata._Z11ps2dev_taskv
-                0x1002da04       0x6c CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x1002ddd4       0xf4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .rodata.spin_lock_claim_unused.str1.4
-                0x1002da70       0x1b CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
- *fill*         0x1002da8b        0x1 
+                0x1002dec8       0x1b CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+ *fill*         0x1002dee3        0x1 
  .rodata.hardware_alarm_claim.str1.4
-                0x1002da8c       0x22 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
- *fill*         0x1002daae        0x2 
+                0x1002dee4       0x22 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+ *fill*         0x1002df06        0x2 
  .rodata.panic.str1.4
-                0x1002dab0       0x12 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
- *fill*         0x1002dac2        0x2 
+                0x1002df08       0x12 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+ *fill*         0x1002df1a        0x2 
  .rodata.hard_assertion_failure.str1.4
-                0x1002dac4        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
+                0x1002df1c        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
  .rodata._ftoa.str1.4
-                0x1002dad0       0x15 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
- *fill*         0x1002dae5        0x3 
+                0x1002df28       0x15 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+ *fill*         0x1002df3d        0x3 
  .rodata._vsnprintf
-                0x1002dae8      0x1e0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x1002df40      0x1e0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .rodata.pow10.0
-                0x1002dcc8       0x50 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x1002e120       0x50 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .rodata.str1.4
-                0x1002dd18       0x44 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e170       0x44 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_44
-                0x1002dd5c        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e1b4        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_75
-                0x1002dd68        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e1c0        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.__bi_81
-                0x1002dd74        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e1cc        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .rodata.crlf_str.0
-                0x1002dd80        0x2 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- *fill*         0x1002dd82        0x2 
+                0x1002e1d8        0x2 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ *fill*         0x1002e1da        0x2 
  .rodata.dma_claim_unused_channel.str1.4
-                0x1002dd84       0x1e CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
- *fill*         0x1002dda2        0x2 
+                0x1002e1dc       0x1e CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+ *fill*         0x1002e1fa        0x2 
  .rodata.hcd_rp2040_irq.str1.4
-                0x1002dda4       0x40 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+                0x1002e1fc       0x40 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
  .rodata.hcd_port_speed_get.str1.4
-                0x1002dde4        0xf CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
- *fill*         0x1002ddf3        0x1 
+                0x1002e23c        0xf CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+ *fill*         0x1002e24b        0x1 
  .rodata._hw_endpoint_buffer_control_update32.part.0.isra.0.str1.4
-                0x1002ddf4       0x1f CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
- *fill*         0x1002de13        0x1 
+                0x1002e24c       0x1f CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+ *fill*         0x1002e26b        0x1 
  .rodata.hw_endpoint_xfer_continue.str1.4
-                0x1002de14       0x29 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
- *fill*         0x1002de3d        0x3 
+                0x1002e26c       0x29 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+ *fill*         0x1002e295        0x3 
  .rodata.str1.4
-                0x1002de40        0x7 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
- *fill*         0x1002de47        0x1 
+                0x1002e298        0x7 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
+ *fill*         0x1002e29f        0x1 
  .rodata.process_enumeration
-                0x1002de48       0x28 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x1002e2a0       0x28 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .rodata.usbh_class_drivers
-                0x1002de70       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x1002e2c8       0x14 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .rodata.str1.4
-                0x1002de84        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x1002e2dc        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .rodata.__bi_142.0
-                0x1002de88        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x1002e2e0        0xc CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .rodata.__bi_152.1
-                0x1002de94        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-                0x1002de9c                . = ALIGN (0x4)
+                0x1002e2ec        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x1002e2f4                . = ALIGN (0x4)
  *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.flashdata*)))
-                0x1002de9c                . = ALIGN (0x4)
+                0x1002e2f4                . = ALIGN (0x4)
 
-.rel.dyn        0x1002de9c        0x0
- .rel.iplt      0x1002de9c        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
+.rel.dyn        0x1002e2f4        0x0
+ .rel.iplt      0x1002e2f4        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x1002de9c                __exidx_start = .
+                0x1002e2f4                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x1002de9c                __exidx_end = .
-                0x1002de9c                . = ALIGN (0x4)
-                0x1002de9c                __binary_info_start = .
+                0x1002e2f4                __exidx_end = .
+                0x1002e2f4                . = ALIGN (0x4)
+                0x1002e2f4                __binary_info_start = .
 
-.binary_info    0x1002de9c       0x24
+.binary_info    0x1002e2f4       0x24
  *(.binary_info.keep.*)
  .binary_info.keep.__bi_ptr22
-                0x1002de9c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e2f4        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr30
-                0x1002dea0        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e2f8        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr38
-                0x1002dea4        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e2fc        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr44
-                0x1002dea8        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e300        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr50
-                0x1002deac        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e304        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr75
-                0x1002deb0        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e308        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr81
-                0x1002deb4        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
+                0x1002e30c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj
  .binary_info.keep.__bi_ptr142
-                0x1002deb8        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x1002e310        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .binary_info.keep.__bi_ptr152
-                0x1002debc        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x1002e314        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  *(.binary_info.*)
-                0x1002dec0                __binary_info_end = .
-                0x1002dec0                . = ALIGN (0x4)
-                0x1002dec0                __etext = .
+                0x1002e318                __binary_info_end = .
+                0x1002e318                . = ALIGN (0x4)
+                0x1002e318                __etext = .
 
 .ram_vector_table
                 0x20000000       0xc0
@@ -2165,7 +2169,7 @@ LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-
                 0x20000000       0xc0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj
                 0x20000000                ram_vector_table
 
-.data           0x200000c0      0x3b8 load address 0x1002dec0
+.data           0x200000c0      0x3b8 load address 0x1002e318
                 0x200000c0                __data_start__ = .
  *(vtable)
  *(.time_critical*)
@@ -2278,29 +2282,29 @@ LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-
                 0x20000478                . = ALIGN (0x4)
                 0x20000478                __data_end__ = .
 
-.igot.plt       0x20000478        0x0 load address 0x1002e278
+.igot.plt       0x20000478        0x0 load address 0x1002e6d0
  .igot.plt      0x20000478        0x0 c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
 
 .uninitialized_data
-                0x20000478        0x0 load address 0x1002e278
+                0x20000478        0x0 load address 0x1002e6d0
                 0x20000478                . = ALIGN (0x4)
  *(.uninitialized_data*)
 
-.scratch_x      0x20040000        0x0 load address 0x1002e278
+.scratch_x      0x20040000        0x0 load address 0x1002e6d0
                 0x20040000                __scratch_x_start__ = .
  *(.scratch_x.*)
                 0x20040000                . = ALIGN (0x4)
                 0x20040000                __scratch_x_end__ = .
-                0x1002e278                __scratch_x_source__ = LOADADDR (.scratch_x)
+                0x1002e6d0                __scratch_x_source__ = LOADADDR (.scratch_x)
 
-.scratch_y      0x20041000        0x0 load address 0x1002e278
+.scratch_y      0x20041000        0x0 load address 0x1002e6d0
                 0x20041000                __scratch_y_start__ = .
  *(.scratch_y.*)
                 0x20041000                . = ALIGN (0x4)
                 0x20041000                __scratch_y_end__ = .
-                0x1002e278                __scratch_y_source__ = LOADADDR (.scratch_y)
+                0x1002e6d0                __scratch_y_source__ = LOADADDR (.scratch_y)
 
-.bss            0x20000478    0x20418
+.bss            0x20000478    0x20424
                 0x20000478                . = ALIGN (0x4)
                 0x20000478                __bss_start__ = .
  *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.bss*)))
@@ -2313,115 +2317,121 @@ LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-
  .bss.sf_table  0x20000680      0x100 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_float/float_init_rom.c.obj
                 0x20000680                sf_table
  .bss           0x20000780       0x1c c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp/crtbegin.o
- .bss._ZL12ps2dev_state
+ .bss._ZL11send_result
                 0x2000079c        0x4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+ .bss._ZL12ps2dev_state
+                0x200007a0        0x4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .bss._ZL12receive_fifo
-                0x200007a0        0x8 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x200007a4        0x8 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .bss._ZL13dma_tx_config
-                0x200007a8        0x4 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
+                0x200007ac        0x4 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
  .bss._ZL13fifo_read_ptr
-                0x200007ac        0x4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x200007b0        0x4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .bss._ZL14dma_tx_channel
-                0x200007b0        0x4 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
+                0x200007b4        0x4 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
  .bss._ZL14fifo_write_ptr
-                0x200007b4        0x4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x200007b8        0x4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .bss._ZL17chip_select_count
-                0x200007b8        0x4 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
- .bss._ZL3sem   0x200007bc        0x8 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x200007bc        0x4 CMakeFiles/sx2_indicator.dir/tft_driver.cpp.obj
+ .bss._ZL3sem   0x200007c0        0x8 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .bss._ZL7buffer1
-                0x200007c4     0xfd20 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x200007c8     0xfd20 CMakeFiles/sx2_indicator.dir/main.cpp.obj
  .bss._ZL7buffer2
-                0x200104e4     0xfd20 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+                0x200104e8     0xfd20 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+ .bss._ZL8ps2state
+                0x20020208        0x4 CMakeFiles/sx2_indicator.dir/main.cpp.obj
+ .bss._ZL9send_data
+                0x2002020c        0x4 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .bss._ZZL13response_corevE8s_buffer
-                0x20020204       0x1f CMakeFiles/sx2_indicator.dir/main.cpp.obj
- *fill*         0x20020223        0x1 
+                0x20020210       0x1f CMakeFiles/sx2_indicator.dir/main.cpp.obj
+ *fill*         0x2002022f        0x1 
  .bss._ctrl_xfer
-                0x20020224       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x20020224                _ctrl_xfer
- .bss._dev0     0x2002023c        0x5 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
- *fill*         0x20020241        0x3 
+                0x20020230       0x18 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x20020230                _ctrl_xfer
+ .bss._dev0     0x20020248        0x5 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+ *fill*         0x2002024d        0x3 
  .bss._hidh_dev
-                0x20020244      0x11a CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
- *fill*         0x2002035e        0x2 
+                0x20020250      0x11a CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/class/hid/hid_host.c.obj
+ *fill*         0x2002036a        0x2 
  .bss._usbh_ctrl_buf
-                0x20020360      0x100 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x2002036c      0x100 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .bss._usbh_devices
-                0x20020460       0x26 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x20020460                _usbh_devices
- *fill*         0x20020486        0x2 
+                0x2002046c       0x26 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x2002046c                _usbh_devices
+ *fill*         0x20020492        0x2 
  .bss._usbh_mutex
-                0x20020488        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x20020494        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .bss._usbh_mutexdef
-                0x2002048c        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
- .bss._usbh_q   0x20020494        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x20020498        0x8 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+ .bss._usbh_q   0x200204a0        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .bss._usbh_qdef_buf
-                0x20020498       0xc0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
-                0x20020498                _usbh_qdef_buf
+                0x200204a4       0xc0 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x200204a4                _usbh_qdef_buf
  .bss.alarm_callbacks
-                0x20020558       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
- .bss.claimed   0x20020568        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
+                0x20020564       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+ .bss.claimed   0x20020574        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_sync/sync.c.obj
  .bss.configured_freq
-                0x2002056c       0x28 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
+                0x20020578       0x28 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.obj
  .bss.default_alarm_pool_entry_ids_high
-                0x20020594       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x200205a0       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .bss.default_alarm_pool_heap_nodes
-                0x200205a4       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
- .bss.drivers   0x200205d4        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- .bss.ep_pool   0x200205d8      0x240 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
- .bss.filter    0x20020818        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
- .bss.hid_info  0x2002081c       0x24 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x200205b0       0x30 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+ .bss.drivers   0x200205e0        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .bss.ep_pool   0x200205e4      0x240 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/hcd_rp2040.c.obj
+ .bss.filter    0x20020824        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj
+ .bss.hid_info  0x20020828       0x24 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
  .bss.lazy_vsnprintf
-                0x20020840        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
+                0x2002084c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_printf/printf.c.obj
  .bss.mouse_button
-                0x20020844        0x4 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x20020850        0x4 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
  .bss.mouse_resolution
-                0x20020848        0x4 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
- .bss.pools     0x2002084c       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x20020854        0x4 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+ .bss.pools     0x20020858       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .bss.sf_clz_func
-                0x2002085c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
-                0x2002085c                sf_clz_func
+                0x20020868        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_double/double_init_rom.c.obj
+                0x20020868                sf_clz_func
  .bss.sleep_notifier
-                0x20020860        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
+                0x2002086c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/common/pico_time/time.c.obj
  .bss.target_hi
-                0x20020864       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x20020870       0x10 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  .bss.uart_char_to_line_feed
-                0x20020874        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
-                0x20020874                uart_char_to_line_feed
+                0x20020880        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_uart/uart.c.obj
+                0x20020880                uart_char_to_line_feed
  .bss.uart_inst
-                0x20020878        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
+                0x20020884        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .bss.uart_instance
-                0x2002087c        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
- .bss._claimed  0x20020880        0x2 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
+                0x20020888        0x4 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.obj
+ .bss._claimed  0x2002088c        0x2 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj
  .bss.mouse_delta_x
-                0x20020882        0x2 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x2002088e        0x2 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
  .bss.mouse_delta_y
-                0x20020884        0x2 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x20020890        0x2 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
  .bss._ZL12parity_check
-                0x20020886        0x1 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+                0x20020892        0x1 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
  .bss._ZL12receive_data
-                0x20020887        0x1 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
- .bss.claimed   0x20020888        0x1 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x20020893        0x1 CMakeFiles/sx2_indicator.dir/ps2dev_driver.cpp.obj
+ .bss.claimed   0x20020894        0x1 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  .bss.detect_mode
-                0x20020889        0x1 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x20020895        0x1 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
  .bss.failed_count.0
-                0x2002088a        0x1 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
+                0x20020896        0x1 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/host/usbh.c.obj
  .bss.irq_hander_chain_free_slot_head
-                0x2002088b        0x1 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
+                0x20020897        0x1 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
  .bss.mouse_consume_data
-                0x2002088c        0x1 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
+                0x20020898        0x1 CMakeFiles/sx2_indicator.dir/usb_host_driver.c.obj
  .bss.timer_callbacks_pending
-                0x2002088d        0x1 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
+                0x20020899        0x1 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/hardware_timer/timer.c.obj
  *(COMMON)
-                0x20020890                . = ALIGN (0x4)
- *fill*         0x2002088e        0x2 
-                0x20020890                __bss_end__ = .
+                0x2002089c                . = ALIGN (0x4)
+ *fill*         0x2002089a        0x2 
+                0x2002089c                __bss_end__ = .
 
-.heap           0x20020890      0x800
-                0x20020890                __end__ = .
-                0x20020890                end = __end__
+.heap           0x2002089c      0x800
+                0x2002089c                __end__ = .
+                0x2002089c                end = __end__
  *(.heap*)
- .heap          0x20020890      0x800 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
-                0x20021090                __HeapLimit = .
+ .heap          0x2002089c      0x800 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
+                0x2002109c                __HeapLimit = .
 
 .stack1_dummy   0x20040000      0x800
  *(.stack1*)
@@ -2431,8 +2441,8 @@ LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-
  *(.stack*)
  .stack         0x20041000      0x800 CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/src/rp2_common/pico_standard_link/crt0.S.obj
 
-.flash_end      0x1002e278        0x0
-                0x1002e278                __flash_binary_end = .
+.flash_end      0x1002e6d0        0x0
+                0x1002e6d0                __flash_binary_end = .
                 0x20040000                __StackLimit = (ORIGIN (RAM) + LENGTH (RAM))
                 0x20041000                __StackOneTop = (ORIGIN (SCRATCH_X) + LENGTH (SCRATCH_X))
                 0x20042000                __StackTop = (ORIGIN (SCRATCH_Y) + LENGTH (SCRATCH_Y))
@@ -2504,7 +2514,7 @@ LOAD CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware
 LOAD CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/tusb.c.obj
 LOAD CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
 LOAD CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
-LOAD C:\Users\hra\AppData\Local\Temp\ccmTWGfW.o
+LOAD C:\Users\hra\AppData\Local\Temp\cciiXoEy.o
 LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libstdc++.a
 LOAD c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libm.a
 START GROUP
@@ -2628,7 +2638,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000858       0x2c CMakeFiles/sx2_indicator.dir/C_/Users/hra/Documents/github/sangria_firmware/pico-sdk/lib/tinyusb/hw/bsp/rp2040/family.c.obj
  .ARM.attributes
-                0x00000884       0x22 C:\Users\hra\AppData\Local\Temp\ccmTWGfW.o
+                0x00000884       0x22 C:\Users\hra\AppData\Local\Temp\cciiXoEy.o
  .ARM.attributes
                 0x000008a6       0x1e c:/progra~2/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp\libgcc.a(_dvmd_tls.o)
  .ARM.attributes
