@@ -65,7 +65,6 @@ enum {
 	PS2_SEND_1ST_BYTE,
 	PS2_SEND_2ND_BYTE,
 	PS2_SEND_3RD_BYTE,
-	PS2_SEND_4TH_BYTE,
 };
 static int ps2state = PS2_IDLE;
 
@@ -75,7 +74,7 @@ static void response_core( void ) {
 	int16_t delta_x, delta_y;
 	int32_t button;
 	uint16_t *p_draw_buffer;
-	int mouse_x = 240 / 2, mouse_y = 135 / 2;
+	int mouse_x = 240 / 2, mouse_y = 135 / 2, mouse_button = 0;
 	static char s_buffer[31] = {};
 	uint8_t data;
 
@@ -191,43 +190,54 @@ static void response_core( void ) {
 			}
 			break;
 		case PS2_SEND_1ST_BYTE:
-			if( ps2dev_send_data( 0x09 ) ) {
-				sprintf( s_buffer, "SEND PS/2 0x09." );
-				ps2state = PS2_SEND_2ND_BYTE;
-				delta_x = 0;
-				delta_y = 0;
-				if( is_mouse_active() ) {
-					get_mouse_position( &delta_x, &delta_y, &button );
-					mouse_x += delta_x;
-					mouse_y += delta_y;
-					if( mouse_x < 0 ) {
-						mouse_x = 0;
-					}
-					else if( mouse_x > 240 ) {
-						mouse_x = 240;
-					}
-					if( mouse_y < 0 ) {
-						mouse_y = 0;
-					}
-					else if( mouse_y > 135 ) {
-						mouse_y = 135;
-					}
+			delta_x = 0;
+			delta_y = 0;
+			if( is_mouse_active() ) {
+				get_mouse_position( &delta_x, &delta_y, &button );
+				mouse_x += delta_x;
+				mouse_y += delta_y;
+				if( mouse_x < 0 ) {
+					mouse_x = 0;
 				}
-				if( delta_x < -128 ) {
-					delta_x = -128;
+				else if( mouse_x > 240 ) {
+					mouse_x = 240;
 				}
-				else if( delta_x > 127 ) {
-					delta_x = 127;
+				if( mouse_y < 0 ) {
+					mouse_y = 0;
 				}
-				if( delta_y < -128 ) {
-					delta_y = -128;
-				}
-				else if( delta_y > 127 ) {
-					delta_y = 127;
+				else if( mouse_y > 135 ) {
+					mouse_y = 135;
 				}
 			}
+			if( delta_x < -128 ) {
+				delta_x = -128;
+			}
+			else if( delta_x > 127 ) {
+				delta_x = 127;
+			}
+			delta_y = -delta_y;
+			if( delta_y < -128 ) {
+				delta_y = -128;
+			}
+			else if( delta_y > 127 ) {
+				delta_y = 127;
+			}
+			mouse_button = 0x08;
+			if( button & MOUSE_BUTTON_LEFT ) {
+				mouse_button |= 0x01;
+			}
+			if( button & MOUSE_BUTTON_RIGHT ) {
+				mouse_button |= 0x02;
+			}
+			if( button & MOUSE_BUTTON_MIDDLE ) {
+				mouse_button |= 0x04;
+			}
+			if( ps2dev_send_data( mouse_button ) ) {
+				sprintf( s_buffer, "SEND PS/2 button." );
+				ps2state = PS2_SEND_2ND_BYTE;
+			}
 			else {
-				sprintf( s_buffer, "SENDING PS/2 0x09." );
+				sprintf( s_buffer, "SENDING PS/2 button." );
 			}
 			break;
 		case PS2_SEND_2ND_BYTE:
@@ -242,19 +252,10 @@ static void response_core( void ) {
 		case PS2_SEND_3RD_BYTE:
 			if( ps2dev_send_data( delta_y ) ) {
 				sprintf( s_buffer, "SEND PS/2 delta_y." );
-				ps2state = PS2_SEND_4TH_BYTE;
-			}
-			else {
-				sprintf( s_buffer, "SENDING PS/2 delta_y." );
-			}
-			break;
-		case PS2_SEND_4TH_BYTE:
-			if( ps2dev_send_data( 0 ) ) {
-				sprintf( s_buffer, "SEND PS/2 delta_z." );
 				ps2state = PS2_SEND_1ST_BYTE;
 			}
 			else {
-				sprintf( s_buffer, "SENDING PS/2 delta_z." );
+				sprintf( s_buffer, "SENDING PS/2 delta_y." );
 			}
 			break;
 		default:
@@ -280,7 +281,7 @@ int main( void ) {
 
 	multicore_launch_core1( response_core );
 
-	tusb_init();
+	usb_init();
 	for( ;; ) {
 		tuh_task();
 		ps2dev_task();

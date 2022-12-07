@@ -28,6 +28,7 @@
 #include "tusb_config.h"
 #include "usb_host_driver.h"
 #include "bsp/board.h"
+#include <pico/multicore.h>
 
 typedef enum {
 	DM_UNKNOWN = 0,
@@ -41,7 +42,7 @@ static volatile int16_t			mouse_delta_x = 0;
 static volatile int16_t			mouse_delta_y = 0;
 static volatile int				mouse_resolution = 0;
 static int32_t					mouse_button = 0;
-static bool						mouse_consume_data = false;
+static semaphore_t				sem;
 
 #define MAX_REPORT	4
 #define DEBUG_ON	0
@@ -53,6 +54,13 @@ static struct {
 } hid_info[ CFG_TUH_HID ];
 
 // --------------------------------------------------------------------
+void usb_init( void ) {
+
+	tusb_init();
+	sem_init( &sem, 1, 1 );
+}
+
+// --------------------------------------------------------------------
 bool is_mouse_active( void ) {
 	return( detect_mode == DM_MOUSE );
 }
@@ -61,16 +69,20 @@ bool is_mouse_active( void ) {
 void get_mouse_position( int16_t *p_delta_x, int16_t *p_delta_y, int32_t *p_button ) {
 
 	if( detect_mode == DM_MOUSE ) {
+		sem_acquire_blocking( &sem );
 		*p_delta_x	= mouse_delta_x;
 		*p_delta_y	= mouse_delta_y;
 		*p_button	= mouse_button;
+		mouse_delta_x = 0;
+		mouse_delta_y = 0;
+		mouse_button = 0;
+		sem_release( &sem );
 	}
 	else {
 		*p_delta_x	= 0;
 		*p_delta_y	= 0;
 		*p_button	= 0;
 	}
-	mouse_consume_data = true;
 }
 
 // --------------------------------------------------------------------
@@ -78,11 +90,7 @@ static void process_mouse_report( hid_mouse_report_t const * report ) {
 	int16_t delta_x;
 	int16_t delta_y;
 
-	if( mouse_consume_data ) {
-		mouse_consume_data = false;
-		mouse_delta_x = 0;
-		mouse_delta_y = 0;
-	}
+	sem_acquire_blocking( &sem );
 	delta_x = mouse_delta_x + (int16_t) report->x;
 	if( delta_x < -127 ) {
 		delta_x = -127;
@@ -100,10 +108,9 @@ static void process_mouse_report( hid_mouse_report_t const * report ) {
 	}
 
 	mouse_button = (report->buttons & (MOUSE_BUTTON_RIGHT | MOUSE_BUTTON_LEFT | MOUSE_BUTTON_MIDDLE));
-
-	//	îrëºêßå‰ÇÕñ ì|Ç»ÇÃÇ≈è»ó™ (^^;
 	mouse_delta_x = delta_x;
 	mouse_delta_y = delta_y;
+	sem_release( &sem );
 }
 
 // --------------------------------------------------------------------
@@ -114,7 +121,9 @@ static void process_mouse_report( hid_mouse_report_t const * report ) {
 void tuh_hid_mount_cb( uint8_t dev_addr, uint8_t instance, uint8_t const* desc_report, uint16_t desc_len ) {
 
 	// Interface protocol (hid_interface_protocol_enum_t)
-	static const char* protocol_str[] = { "None", "Keyboard", "Mouse" };
+	#if DEBUG_ON
+		static const char* protocol_str[] = { "None", "Keyboard", "Mouse" };
+	#endif
 	uint8_t const itf_protocol = tuh_hid_interface_protocol( dev_addr, instance );
 	#if DEBUG_ON
 		printf( "tuh_hid_mount_cb( %d, %d ) : [%s]\r\n", dev_addr, instance, protocol_str[ itf_protocol ] );
