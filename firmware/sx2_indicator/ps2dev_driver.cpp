@@ -113,37 +113,71 @@ static uint8_t parity_check;
 static semaphore_t sem;
 
 static uint8_t receive_fifo[ 8 ];
-static int fifo_read_ptr;
-static int fifo_write_ptr;
+static int receive_fifo_read_ptr;
+static int receive_fifo_write_ptr;
+static uint8_t send_fifo[ 8 ];
+static int send_fifo_read_ptr;
+static int send_fifo_write_ptr;
 
 // --------------------------------------------------------------------
-static bool inline is_fifo_empty( void ) {
-	return( fifo_read_ptr == fifo_write_ptr );
+static bool inline is_send_fifo_empty( void ) {
+	return( send_fifo_read_ptr == send_fifo_write_ptr );
 }
 
 // --------------------------------------------------------------------
-static bool inline is_fifo_full( void ) {
-	return( ((fifo_write_ptr + 1) & 7) == fifo_read_ptr );
+static bool inline is_send_fifo_full( void ) {
+	return( ((send_fifo_write_ptr + 1) & 7) == send_fifo_read_ptr );
 }
 
 // --------------------------------------------------------------------
-static void push_fifo( uint8_t data ) {
-	if( is_fifo_full() ) {
+static void push_send_fifo( uint8_t data ) {
+	if( is_send_fifo_full() ) {
 		return;
 	}
-	receive_fifo[ fifo_write_ptr ] = data;
-	fifo_write_ptr = (fifo_write_ptr + 1) & 7;
+	send_fifo[ send_fifo_write_ptr ] = data;
+	send_fifo_write_ptr = (send_fifo_write_ptr + 1) & 7;
 }
 
 // --------------------------------------------------------------------
-static uint8_t pop_fifo( void ) {
+static uint8_t pop_send_fifo( void ) {
 	uint8_t data;
 
-	if( is_fifo_empty() ) {
+	if( is_send_fifo_empty() ) {
 		return 0;
 	}
-	data = receive_fifo[ fifo_read_ptr ];
-	fifo_read_ptr = (fifo_read_ptr + 1) & 7;
+	data = send_fifo[ send_fifo_read_ptr ];
+	send_fifo_read_ptr = (send_fifo_read_ptr + 1) & 7;
+	return data;
+}
+
+// --------------------------------------------------------------------
+static bool inline is_receive_fifo_empty( void ) {
+	return( receive_fifo_read_ptr == receive_fifo_write_ptr );
+}
+
+// --------------------------------------------------------------------
+static bool inline is_receive_fifo_full( void ) {
+	return( ((receive_fifo_write_ptr + 1) & 7) == receive_fifo_read_ptr );
+}
+
+// --------------------------------------------------------------------
+static void push_receive_fifo( uint8_t data ) {
+	if( is_receive_fifo_full() ) {
+		return;
+	}
+	receive_fifo[ receive_fifo_write_ptr ] = data;
+	receive_fifo_write_ptr = (receive_fifo_write_ptr + 1) & 7;
+}
+
+// --------------------------------------------------------------------
+static uint8_t pop_receive_fifo( void ) {
+	uint8_t data;
+
+	if( is_receive_fifo_empty() ) {
+		return 0;
+	}
+	data = receive_fifo[ receive_fifo_read_ptr ];
+	receive_fifo_read_ptr = (receive_fifo_read_ptr + 1) & 7;
 	return data;
 }
 
@@ -165,8 +199,8 @@ bool ps2dev_init( void ) {
 	gpio_put( PS2DAT_PORT, 0 );
 	ps2dev_state = PS2DEV_IDLE;
 
-	fifo_read_ptr = 0;
-	fifo_write_ptr = 0;
+	receive_fifo_read_ptr = 0;
+	receive_fifo_write_ptr = 0;
 	sem_init( &sem, 1, 1 );
 	return true;
 }
@@ -181,6 +215,17 @@ void ps2dev_task( void ) {
 			//	PS2CLK is LOW. It's send request from HOST.
 			ps2dev_state = PS2DEV_WAIT_START_BIT;
 			start_time = _get_us();
+		}
+		else if( !is_send_fifo_empty() ) {
+			uint8_t data;
+
+			sem_acquire_blocking( &sem );
+			data = pop_send_fifo();
+			sem_release( &sem );
+			//	dddd_dddd → 1d_dddd_ddd0
+			send_data = (data << 1) | 0x200;
+			send_result = SEND_DATA;
+			ps2dev_state = PS2DEV_SEND_DATA;
 		}
 		break;
 	case PS2DEV_WAIT_START_BIT:
@@ -286,8 +331,8 @@ void ps2dev_task( void ) {
 			gpio_set_dir( PS2CLK_PORT, GPIO_IN );
 
 			sem_acquire_blocking( &sem );
-			if( !is_fifo_full() ) {
-				push_fifo( receive_data );
+			if( !is_receive_fifo_full() ) {
+				push_receive_fifo( receive_data );
 			}
 			sem_release( &sem );
 			ps2dev_state = PS2DEV_ACK_DAT_END;
@@ -411,17 +456,17 @@ void ps2dev_task( void ) {
 // --------------------------------------------------------------------
 bool ps2dev_check_receive_buffer_empty( void ) {
 
-	return is_fifo_empty();
+	return is_receive_fifo_empty();
 }
 
 // --------------------------------------------------------------------
 bool ps2dev_get_receive_data( uint8_t *p_data ) {
 
-	if( is_fifo_empty() ) {
+	if( is_receive_fifo_empty() ) {
 		return false;
 	}
 	sem_acquire_blocking( &sem );
-	*p_data = pop_fifo();
+	*p_data = pop_receive_fifo();
 	sem_release( &sem );
 	return true;
 }
@@ -429,15 +474,17 @@ bool ps2dev_get_receive_data( uint8_t *p_data ) {
 // --------------------------------------------------------------------
 bool ps2dev_send_data( uint8_t data ) {
 
-	if( ps2dev_state != PS2DEV_IDLE ) {
+	if( is_send_fifo_full() ) {
 		return false;
 	}
-	//	dddd_dddd → 1d_dddd_ddd0
-	send_data = (data << 1) | 0x200;
-	send_result = SEND_DATA;
-	ps2dev_state = PS2DEV_SEND_DATA;
-	while( send_result == SEND_DATA ) {
-		sleep_us( 30 );
-	}
-	return( send_result == SEND_SUCCESS );
+	sem_acquire_blocking( &sem );
+	push_send_fifo( data );
+	sem_release( &sem );
+	return true;
+}
+
+// --------------------------------------------------------------------
+bool ps2dev_is_send_fifo_empty( void ) {
+
+	return( is_send_fifo_empty() );
 }

@@ -78,4 +78,14 @@ bool ps2dev_get_receive_data( uint8_t *p_data );
 // --------------------------------------------------------------------
 bool ps2dev_send_data( uint8_t data );
 
+// --------------------------------------------------------------------
+//	Check send fifo
+//	input:
+//		none
+//	output:
+//		true ........... empty
+//		false .......... not empty
+// --------------------------------------------------------------------
+bool ps2dev_is_send_fifo_empty( void );
+
 #endif
