@@ -75,7 +75,6 @@ void get_mouse_position( int16_t *p_delta_x, int16_t *p_delta_y, int32_t *p_butt
 		*p_button	= mouse_button;
 		mouse_delta_x = 0;
 		mouse_delta_y = 0;
-		mouse_button = 0;
 		sem_release( &sem );
 	}
 	else {

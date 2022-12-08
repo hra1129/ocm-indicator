@@ -228,6 +228,7 @@ static void response_core( void ) {
 			ps2dev_send_data( mouse_button );
 			ps2dev_send_data( delta_x );
 			ps2dev_send_data( delta_y );
+			sprintf( s_buffer, "MOUSE BUTTON 0x%02X.", mouse_button );
 			break;
 		default:
 			break;
