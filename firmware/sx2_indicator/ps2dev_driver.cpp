@@ -112,7 +112,7 @@ static volatile int send_result;
 static uint8_t parity_check;
 static semaphore_t sem;
 
-static uint8_t receive_fifo[ 8 ];
+static uint8_t receive_fifo[ 16 ];
 static int receive_fifo_read_ptr;
 static int receive_fifo_write_ptr;
 static uint8_t send_fifo[ 8 ];
@@ -157,7 +157,7 @@ static bool inline is_receive_fifo_empty( void ) {
 
 // --------------------------------------------------------------------
 static bool inline is_receive_fifo_full( void ) {
-	return( ((receive_fifo_write_ptr + 1) & 7) == receive_fifo_read_ptr );
+	return( ((receive_fifo_write_ptr + 1) & 15) == receive_fifo_read_ptr );
 }
 
 // --------------------------------------------------------------------
@@ -166,7 +166,7 @@ static void push_receive_fifo( uint8_t data ) {
 		return;
 	}
 	receive_fifo[ receive_fifo_write_ptr ] = data;
-	receive_fifo_write_ptr = (receive_fifo_write_ptr + 1) & 7;
+	receive_fifo_write_ptr = (receive_fifo_write_ptr + 1) & 15;
 }
 
 // --------------------------------------------------------------------
@@ -177,7 +177,7 @@ static uint8_t pop_receive_fifo( void ) {
 		return 0;
 	}
 	data = receive_fifo[ receive_fifo_read_ptr ];
-	receive_fifo_read_ptr = (receive_fifo_read_ptr + 1) & 7;
+	receive_fifo_read_ptr = (receive_fifo_read_ptr + 1) & 15;
 	return data;
 }
 
@@ -263,7 +263,9 @@ void ps2dev_task( void ) {
 	case PS2DEV_D7_CLK_TO_LOW:
 	case PS2DEV_PARITY_CLK_TO_LOW:
 	case PS2DEV_STOP_CLK_TO_LOW:
-		if( (_get_us() - start_time) > 30 ) {
+		//	Info.) The clock width should be set to 3usec because the TinyUSB task is too busy at that time. 
+		//	       3usec can be accepted without any problem on the SX2 main unit side.
+		if( (_get_us() - start_time) > 3 ) {
 			//	Set PS2CLK LOW.
 			gpio_set_dir( PS2CLK_PORT, GPIO_OUT );
 			ps2dev_state++;
@@ -278,7 +280,10 @@ void ps2dev_task( void ) {
 	case PS2DEV_D5_WAIT:
 	case PS2DEV_D6_WAIT:
 	case PS2DEV_D7_WAIT:
-		if( (_get_us() - start_time) > 30 ) {
+		//	Info.) Originally, it should be 30usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 3usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 3usec without any problem.
+		if( (_get_us() - start_time) > 3 ) {
 			//	Set PS2CLK HIGH.
 			gpio_set_dir( PS2CLK_PORT, GPIO_IN );
 			receive_data >>= 1;
@@ -291,7 +296,10 @@ void ps2dev_task( void ) {
 		}
 		break;
 	case PS2DEV_PARITY_WAIT:
-		if( (_get_us() - start_time) > 30 ) {
+		//	Info.) Originally, it should be 30usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 3usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 3usec without any problem.
+		if( (_get_us() - start_time) > 3 ) {
 			//	Set PS2CLK HIGH.
 			gpio_set_dir( PS2CLK_PORT, GPIO_IN );
 			if( gpio_get( PS2DAT_PORT ) ) {
@@ -302,7 +310,10 @@ void ps2dev_task( void ) {
 		}
 		break;
 	case PS2DEV_STOP_WAIT:
-		if( (_get_us() - start_time) > 30 ) {
+		//	Info.) Originally, it should be 30usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 3usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 3usec without any problem.
+		if( (_get_us() - start_time) > 3 ) {
 			//	Set PS2CLK HIGH.
 			gpio_set_dir( PS2CLK_PORT, GPIO_IN );
 			ps2dev_state++;
@@ -310,7 +321,10 @@ void ps2dev_task( void ) {
 		}
 		break;
 	case PS2DEV_SEND_ACK:
-		if( (_get_us() - start_time) > 5 ) {
+		//	Info.) Originally, it should be 5usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 1usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 1usec without any problem.
+		if( (_get_us() - start_time) > 1 ) {
 			//	Set PS2DAT LOW.
 			gpio_set_dir( PS2DAT_PORT, GPIO_OUT );
 			ps2dev_state++;
@@ -318,7 +332,10 @@ void ps2dev_task( void ) {
 		}
 		break;
 	case PS2DEV_ACK_CLK_TO_LOW:
-		if( (_get_us() - start_time) > 25 ) {
+		//	Info.) Originally, it should be 25usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 2usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 2usec without any problem.
+		if( (_get_us() - start_time) > 2 ) {
 			//	Set PS2CLK LOW.
 			gpio_set_dir( PS2CLK_PORT, GPIO_OUT );
 			ps2dev_state++;
@@ -326,7 +343,10 @@ void ps2dev_task( void ) {
 		}
 		break;
 	case PS2DEV_ACK_CLK_END:
-		if( (_get_us() - start_time) > 30 ) {
+		//	Info.) Originally, it should be 30usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 3usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 3usec without any problem.
+		if( (_get_us() - start_time) > 3 ) {
 			//	Set PS2CLK HIGH.
 			gpio_set_dir( PS2CLK_PORT, GPIO_IN );
 
@@ -339,7 +359,10 @@ void ps2dev_task( void ) {
 		}
 		break;
 	case PS2DEV_ACK_DAT_END:
-		if( (_get_us() - start_time) > 5 ) {
+		//	Info.) Originally, it should be 5usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 1usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 1usec without any problem.
+		if( (_get_us() - start_time) > 1 ) {
 			//	Set PS2DAT HIGH.
 			gpio_set_dir( PS2DAT_PORT, GPIO_IN );
 
@@ -364,7 +387,10 @@ void ps2dev_task( void ) {
 	case PS2DEV_SEND_D6:
 	case PS2DEV_SEND_D7:
 	case PS2DEV_SEND_STOP:
-		if( (_get_us() - start_time) > 15 ) {
+		//	Info.) Originally, it should be 15usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 1usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 1usec without any problem.
+		if( (_get_us() - start_time) > 1 ) {
 			if( !gpio_get( PS2CLK_PORT ) ) {
 				send_result = SEND_ABORT;
 				ps2dev_state = PS2DEV_IDLE;
@@ -384,7 +410,10 @@ void ps2dev_task( void ) {
 		}
 		break;
 	case PS2DEV_SEND_PARITY:
-		if( (_get_us() - start_time) > 15 ) {
+		//	Info.) Originally, it should be 15usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 1usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 1usec without any problem.
+		if( (_get_us() - start_time) > 1 ) {
 			if( !gpio_get( PS2CLK_PORT ) ) {
 				send_result = SEND_ABORT;
 				ps2dev_state = PS2DEV_IDLE;
@@ -412,7 +441,10 @@ void ps2dev_task( void ) {
 	case PS2DEV_SEND_D7_CLK_TO_LOW:
 	case PS2DEV_SEND_PARITY_CLK_TO_LOW:
 	case PS2DEV_SEND_STOP_CLK_TO_LOW:
-		if( (_get_us() - start_time) > 15 ) {
+		//	Info.) Originally, it should be 15usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 1usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 1usec without any problem.
+		if( (_get_us() - start_time) > 1 ) {
 			if( !gpio_get( PS2CLK_PORT ) ) {
 				send_result = SEND_ABORT;
 				ps2dev_state = PS2DEV_IDLE;
@@ -433,7 +465,10 @@ void ps2dev_task( void ) {
 	case PS2DEV_SEND_D6_WAIT:
 	case PS2DEV_SEND_D7_WAIT:
 	case PS2DEV_SEND_PARITY_WAIT:
-		if( (_get_us() - start_time) > 30 ) {
+		//	Info.) Originally, it should be 30usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 3usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 3usec without any problem.
+		if( (_get_us() - start_time) > 3 ) {
 			//	Set PS2CLK HIGH.
 			gpio_set_dir( PS2CLK_PORT, GPIO_IN );
 			ps2dev_state++;
@@ -441,7 +476,10 @@ void ps2dev_task( void ) {
 		}
 		break;
 	case PS2DEV_SEND_STOP_WAIT:
-		if( (_get_us() - start_time) > 30 ) {
+		//	Info.) Originally, it should be 30usec or longer.
+		//	       However, since there are cases where the TinyUSB task takes a long time, we decided to set it to 3usec, which shortens the width of PS2CLK.
+		//	       The SX2 main unit side can accept 3usec without any problem.
+		if( (_get_us() - start_time) > 3 ) {
 			//	Set PS2CLK HIGH.
 			gpio_set_dir( PS2CLK_PORT, GPIO_IN );
 			ps2dev_state = PS2DEV_IDLE;
@@ -487,4 +525,10 @@ bool ps2dev_send_data( uint8_t data ) {
 bool ps2dev_is_send_fifo_empty( void ) {
 
 	return( is_send_fifo_empty() );
+}
+
+// --------------------------------------------------------------------
+int ps2dev_get_state( void ) {
+
+	return ps2dev_state;
 }

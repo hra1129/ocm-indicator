@@ -22,6 +22,8 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //	THE SOFTWARE.
 // --------------------------------------------------------------------
+//	日本語（エディタの文字コード自動検出用）
+// --------------------------------------------------------------------
 
 #include <cstdio>
 #include <cstdlib>
@@ -38,6 +40,7 @@ using namespace std;
 #include "tft_driver.h"
 #include "usb_host_driver.h"
 #include "ps2dev_driver.h"
+#include "u2p.h"
 
 #define IMAGE_WIDTH		240
 #define IMAGE_HEIGHT	135
@@ -54,27 +57,12 @@ static uint16_t buffer2[ IMAGE_SIZE ];
 #include "resource/grp_mouse.h"
 #include "resource/grp_font.h"
 
-enum {
-	PS2_IDLE = 0,
-	PS2_RESET_RECEIVED,
-	PS2_SEND_SELFTEST_COMPLETE,
-	PS2_SEND_MOUSE_ID,
-	PS2_SEND_ACK,
-	PS2_SEND_ACK_WITH_ID,
-	PS2_SEND_ACK_WITH_PACKET,
-	PS2_SEND_DATAS,
-};
-static int ps2state = PS2_IDLE;
-
 // --------------------------------------------------------------------
 static void response_core( void ) {
 	int y = 0;
-	int16_t delta_x, delta_y;
-	int32_t button;
+	int mouse_x, mouse_y, mouse_button;
 	uint16_t *p_draw_buffer;
-	int mouse_x = 240 / 2, mouse_y = 135 / 2, mouse_button = 0;
 	static char s_buffer[31] = {};
-	uint8_t data;
 
 	tft_init();
 	p_draw_buffer = buffer1;
@@ -96,143 +84,12 @@ static void response_core( void ) {
 			}
 		}
 
+		u2p_get_mouse( &mouse_x, &mouse_y, &mouse_button );
 		if( is_mouse_active() ) {
 			tft_copy( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, mouse_x, mouse_y, grp_mouse, grp_mouse_width, grp_mouse_height, 0, 0, grp_mouse_width, grp_mouse_height );
 		}
 
-		switch( ps2state ) {
-		case PS2_IDLE:
-			if( ps2dev_get_receive_data( &data ) ) {
-				if( data == 0xFF ) {
-					sprintf( s_buffer, "RECEIVE PS/2 RESET CMD." );
-					ps2state++;
-				}
-				else if( data == 0xF3 ) {
-					sprintf( s_buffer, "RECEIVE PS/2 SAMPLE RATE." );
-					ps2state = PS2_SEND_ACK;
-				}
-				else if( data == 0xC8 ) {
-					sprintf( s_buffer, "RECEIVE PS/2 DECIMAL 200." );
-					ps2state = PS2_SEND_ACK;
-				}
-				else if( data == 0x64 ) {
-					sprintf( s_buffer, "RECEIVE PS/2 DECIMAL 100." );
-					ps2state = PS2_SEND_ACK;
-				}
-				else if( data == 0x50 ) {
-					sprintf( s_buffer, "RECEIVE PS/2 DECIMAL 80." );
-					ps2state = PS2_SEND_ACK;
-				}
-				else if( data == 0xF2 ) {
-					sprintf( s_buffer, "RECEIVE PS/2 READ DEVICE TYPE." );
-					ps2state = PS2_SEND_ACK_WITH_ID;
-				}
-				else if( data == 0xF4 ) {
-					sprintf( s_buffer, "RECEIVE PS/2 ENABLE DATA REPO." );
-					ps2state = PS2_SEND_ACK_WITH_PACKET;
-				}
-			}
-			break;
-		case PS2_RESET_RECEIVED:
-			if( ps2dev_send_data( 0xFA ) ) {
-				sprintf( s_buffer, "SEND PS/2 0xFA." );
-				ps2state++;
-			}
-			else {
-				sprintf( s_buffer, "SENDING PS/2 0xFA." );
-			}
-			break;
-		case PS2_SEND_SELFTEST_COMPLETE:
-			if( ps2dev_send_data( 0xAA ) ) {
-				sprintf( s_buffer, "SEND PS/2 0xAA." );
-				ps2state++;
-			}
-			else {
-				sprintf( s_buffer, "SENDING PS/2 0xAA." );
-			}
-			break;
-		case PS2_SEND_MOUSE_ID:
-			if( ps2dev_send_data( 0x00 ) ) {
-				sprintf( s_buffer, "SEND PS/2 0x00." );
-				ps2state = PS2_IDLE;
-			}
-			else {
-				sprintf( s_buffer, "SENDING PS/2 0x00." );
-			}
-			break;
-		case PS2_SEND_ACK:
-			if( ps2dev_send_data( 0xFA ) ) {
-				sprintf( s_buffer, "SEND PS/2 0xFA." );
-				ps2state = PS2_IDLE;
-			}
-			else {
-				sprintf( s_buffer, "SENDING PS/2 0xFA." );
-			}
-			break;
-		case PS2_SEND_ACK_WITH_ID:
-			if( ps2dev_send_data( 0xFA ) ) {
-				sprintf( s_buffer, "SEND PS/2 0xFA." );
-				ps2state = PS2_SEND_MOUSE_ID;
-			}
-			else {
-				sprintf( s_buffer, "SENDING PS/2 0xFA." );
-			}
-			break;
-		case PS2_SEND_ACK_WITH_PACKET:
-			if( ps2dev_send_data( 0xFA ) ) {
-				sprintf( s_buffer, "SEND PS/2 0xFA." );
-				ps2state = PS2_SEND_DATAS;
-			}
-			else {
-				sprintf( s_buffer, "SENDING PS/2 0xFA." );
-			}
-			break;
-		case PS2_SEND_DATAS:
-			if( !ps2dev_is_send_fifo_empty() ) {
-				break;
-			}
-			delta_x = 0;
-			delta_y = 0;
-			mouse_button = 0x08;
-			if( is_mouse_active() ) {
-				get_mouse_position( &delta_x, &delta_y, &button );
-				mouse_x += delta_x;
-				mouse_y += delta_y;
-				if( mouse_x < 0 ) {
-					mouse_x = 0;
-				}
-				else if( mouse_x > 240 ) {
-					mouse_x = 240;
-				}
-				if( mouse_y < 0 ) {
-					mouse_y = 0;
-				}
-				else if( mouse_y > 135 ) {
-					mouse_y = 135;
-				}
-				if( delta_x < -128 ) {
-					delta_x = -128;
-				}
-				else if( delta_x > 127 ) {
-					delta_x = 127;
-				}
-				delta_y = -delta_y;
-				if( delta_y < -128 ) {
-					delta_y = -128;
-				}
-				else if( delta_y > 127 ) {
-					delta_y = 127;
-				}
-				mouse_button |= button;
-			}
-			ps2dev_send_data( mouse_button );
-			ps2dev_send_data( delta_x );
-			ps2dev_send_data( delta_y );
-			sprintf( s_buffer, "MOUSE BUTTON 0x%02X.", mouse_button );
-			break;
-		default:
-			break;
-		}
+		sprintf( s_buffer, "PS2DEV STAT: %d", ps2dev_get_state() );
 		tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, 0, 0, 0xFFFF, grp_font, s_buffer );
 
 		tft_send_framebuffer( p_draw_buffer );
@@ -250,6 +107,7 @@ int main( void ) {
 
 	board_init();
 	ps2dev_init();
+	u2p_init();
 
 	multicore_launch_core1( response_core );
 
@@ -257,6 +115,7 @@ int main( void ) {
 	for( ;; ) {
 		tuh_task();
 		ps2dev_task();
+		u2p_task();
 	}
 	return 0;
 }

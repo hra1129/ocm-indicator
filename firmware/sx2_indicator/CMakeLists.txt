@@ -8,6 +8,7 @@ target_sources( sx2_indicator PUBLIC
 	main.cpp
 	tft_driver.cpp
 	ps2dev_driver.cpp
+	u2p.cpp
 	usb_host_driver.c
 )
 
