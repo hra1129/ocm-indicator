@@ -1,0 +1,99 @@
+OCM Indicator protocol
+===============================================================================
+0. Legend
+	H: = HOST --> OCM Indicator
+	I: = HOST <-- OCM Indicator
+
+1. Reset command
+	H: 0xFF		RESET COMMAND
+	I: 0xFA		ACK
+	I: 0xAA		BAT COMPLETE
+	I: 0x10		MOUSE ID (Indicator)
+
+	A normal PS/2 mouse returns 0x00 as the MOUSE ID.
+	HOST identifies whether it is a mouse or an Indicator by this number.
+
+2. Set sample rate
+	H: 0xF3		SET SAMPLE RATE
+	I: 0xFA
+	H: 40		DECIMAL 40
+	I: 0xFA
+
+	Processed for compatibility with mouse. However, it actually does nothing.
+
+3. Data read
+	H: 0xEB		DATA READ
+	I: 0xFA		ACK
+	I: mouse button
+	I: delta X
+	I: delta Y
+	H: data1
+	H: data2
+	H: data3
+	H: data4
+	H: data5
+	H: data6
+
+	3-1. mouse button
+		bit7                 bit0
+		[0][0][0][J][E][C][R][L]
+			[J] .... mouse or joypad, 0: mouse, 1: joypad
+			[E] .... mouse/joypad connect status, 0: disabled, 1: enabled
+			[C] .... Center button, 0: release, 1: pressed
+			[R] .... Right  button, 0: release, 1: pressed
+			[L] .... Left   button, 0: release, 1: pressed
+
+	3-2. delta X
+		X shift amount expressed in 8-bit two's complement
+		-128 ... 127
+
+	3-3. delta Y
+		Y shift amount expressed in 8-bit two's complement
+		-128 ... 127
+
+	3-4. data1
+		pLed data
+
+	3-5. data2
+		[R][S2][S2][S1][S1][MV][MV][MV]
+			[R] .... pLedPwr data
+			[S2] ... Slt2Mode (2bits) 00: External Slot, 01: ASC8, 10: SCC+, 11: ASC16
+			[S1] ... Slt1Type (2bits) 00: External Slot, 01: ASC8, 10: SCC+, 11: ASC16
+			[MV] ... MstrVol (3bits)
+
+	3-6. data3
+		[OV][OV][OV][PV][PV][PV][SD][PR]
+			[OV] ... OpllVol (3bits)
+			[PV] ... PsgVol (3bits)
+			[SD] ... tMegaSD          0: normal, 1: turbo MegaSD
+			[PR] ... tPanaRedir       0: normal, 1: panasonic mode
+
+	3-7. data4
+		[SV][SV][SV][VS][CS][CS][CS][CS]
+			[SV] ... SccVol
+			[VS] ... VdpSpeedMode     0: normal, 1: fast
+			[CS] ... CustomSpeed (4bits)
+
+	3-8. data5
+		[AM][VM][KL][CA][KA][P2][VS][VS]
+			[AM] ... Af_mask : auto fire mask bit
+			[VM] ... VDP mode 0: V9938, 1: V9958
+			[KL] ... swioKmap : Keyboard layout  0: Japanese, 1: Non-Japanese
+			[CA] ... Caps LED
+			[KA] ... Kana LED
+			[P2] ... iPsg2_ena (2nd PSG), : 0: disable, 1: enable
+			[VS] ... vga_scanlines (2bits), 0: 0%, 1: 25%, 2: 50%, 3: 75%
+
+	3-9. data6
+		[EX][NP][FV][O3][S1][S2][RI][0]
+			[EX] ... extclk3m: External Clock 3.58MHz, 0: No, 1: Yes
+			[NP] ... ntsc_pal_type, 0: Forced, 1: Auto
+			[FV] ... forced_v_mode, 0: 60Hz, 1: 50Hz
+			[O3] ... swioCmt (OPL3 enabler), 0: disable, 1: enable
+			[S1] ... iSlt1_linear, 0: normal, 1: linear
+			[S2] ... iSlt2_linear, 0: normal, 1: linear
+			[RI] ... right_inverse
+
+===============================================================================
+History
+2022/Dec./19th	t.hara(HRA!)	1st release
