@@ -27,6 +27,7 @@ OCM Indicator protocol
 	I: mouse button
 	I: delta X
 	I: delta Y
+	H: Length
 	H: data1
 	H: data2
 	H: data3
@@ -51,30 +52,33 @@ OCM Indicator protocol
 		Y shift amount expressed in 8-bit two's complement
 		-128 ... 127
 
-	3-4. data1
+	3-4. Length
+		Number of bytes of subsequent data
+
+	3-5. data1
 		pLed data
 
-	3-5. data2
+	3-6. data2
 		[R][S2][S2][S1][S1][MV][MV][MV]
 			[R] .... pLedPwr data
 			[S2] ... Slt2Mode (2bits) 00: External Slot, 01: ASC8, 10: SCC+, 11: ASC16
 			[S1] ... Slt1Type (2bits) 00: External Slot, 01: ASC8, 10: SCC+, 11: ASC16
 			[MV] ... MstrVol (3bits)
 
-	3-6. data3
+	3-7. data3
 		[OV][OV][OV][PV][PV][PV][SD][PR]
 			[OV] ... OpllVol (3bits)
 			[PV] ... PsgVol (3bits)
 			[SD] ... tMegaSD          0: normal, 1: turbo MegaSD
 			[PR] ... tPanaRedir       0: normal, 1: panasonic mode
 
-	3-7. data4
+	3-8. data4
 		[SV][SV][SV][VS][CS][CS][CS][CS]
 			[SV] ... SccVol
 			[VS] ... VdpSpeedMode     0: normal, 1: fast
 			[CS] ... CustomSpeed (4bits)
 
-	3-8. data5
+	3-9. data5
 		[AM][VM][KL][CA][KA][P2][VS][VS]
 			[AM] ... Af_mask : auto fire mask bit
 			[VM] ... VDP mode 0: V9938, 1: V9958
@@ -84,7 +88,7 @@ OCM Indicator protocol
 			[P2] ... iPsg2_ena (2nd PSG), : 0: disable, 1: enable
 			[VS] ... vga_scanlines (2bits), 0: 0%, 1: 25%, 2: 50%, 3: 75%
 
-	3-9. data6
+	3-10. data6
 		[EX][NP][FV][O3][S1][S2][RI][0]
 			[EX] ... extclk3m: External Clock 3.58MHz, 0: No, 1: Yes
 			[NP] ... ntsc_pal_type, 0: Forced, 1: Auto
