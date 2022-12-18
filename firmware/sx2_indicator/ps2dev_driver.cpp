@@ -112,12 +112,12 @@ static volatile int send_result;
 static uint8_t parity_check;
 static semaphore_t sem;
 
-static uint8_t receive_fifo[ 16 ];
-static int receive_fifo_read_ptr;
-static int receive_fifo_write_ptr;
-static uint8_t send_fifo[ 8 ];
-static int send_fifo_read_ptr;
-static int send_fifo_write_ptr;
+static volatile uint8_t receive_fifo[ 16 ];
+static volatile int receive_fifo_read_ptr;
+static volatile int receive_fifo_write_ptr;
+static volatile uint8_t send_fifo[ 8 ];
+static volatile int send_fifo_read_ptr;
+static volatile int send_fifo_write_ptr;
 
 // --------------------------------------------------------------------
 static bool inline is_send_fifo_empty( void ) {

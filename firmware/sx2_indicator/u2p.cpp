@@ -30,9 +30,13 @@
 enum {
 	PS2_IDLE = 0,
 	PS2_SEND_DATAS,
+	PS2_RECV_DATAS,
 };
 static int ps2state = PS2_IDLE;
 static int mouse_x = 240 / 2, mouse_y = 135 / 2, mouse_button = 0;
+
+static volatile int ocm_status[1] = {};
+static int ocm_status_write_ptr;
 
 // --------------------------------------------------------------------
 static void ps2_send_datas( void ) {
@@ -80,7 +84,21 @@ static void ps2_send_datas( void ) {
 	ps2dev_send_data( mouse_button );
 	ps2dev_send_data( delta_x );
 	ps2dev_send_data( delta_y );
-	ps2state = PS2_IDLE;
+	ps2state = PS2_RECV_DATAS;
+	ocm_status_write_ptr = 0;
+}
+
+// --------------------------------------------------------------------
+static void ps2_recv_datas( void ) {
+	uint8_t data;
+
+	if( !ps2dev_get_receive_data( &data ) ) {
+		return;
+	}
+	ocm_status[ ocm_status_write_ptr++ ] = data;
+	if( ocm_status_write_ptr == (sizeof(ocm_status) / sizeof(ocm_status[0])) ) {
+		ps2state = PS2_IDLE;
+	}
 }
 
 // --------------------------------------------------------------------
@@ -109,6 +127,9 @@ static void ps2_communication( void ) {
 	case PS2_SEND_DATAS:
 		ps2_send_datas();
 		break;
+	case PS2_RECV_DATAS:
+		ps2_recv_datas();
+		break;
 	default:
 		break;
 	}
@@ -129,4 +150,9 @@ void u2p_get_mouse( int *p_x, int *p_y, int *p_button ) {
 	*p_x		= mouse_x;
 	*p_y		= mouse_y;
 	*p_button	= mouse_button;
+}
+
+// --------------------------------------------------------------------
+int u2p_get_information( int index ) {
+	return ocm_status[ index ];
 }

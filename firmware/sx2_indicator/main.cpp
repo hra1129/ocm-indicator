@@ -60,6 +60,7 @@ static uint16_t buffer2[ IMAGE_SIZE ];
 // --------------------------------------------------------------------
 static void response_core( void ) {
 	int y = 0;
+	int i, d;
 	int mouse_x, mouse_y, mouse_button;
 	uint16_t *p_draw_buffer;
 	static char s_buffer[31] = {};
@@ -89,8 +90,17 @@ static void response_core( void ) {
 			tft_copy( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, mouse_x, mouse_y, grp_mouse, grp_mouse_width, grp_mouse_height, 0, 0, grp_mouse_width, grp_mouse_height );
 		}
 
-		sprintf( s_buffer, "PS2DEV STAT: %d", ps2dev_get_state() );
+
+		// LED
+		d = u2p_get_information( U2P_LED );
+		sprintf( s_buffer, "LED: 0x%02X", d );
 		tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, 0, 0, 0xFFFF, grp_font, s_buffer );
+		for( i = 0; i < 8; i++ ) {
+			if( (d & 0x80) != 0 ) {
+				tft_copy( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, 5 + i * 20, 119, grp_led, grp_led_width, grp_led_height, 0, 0, grp_led_width, grp_led_height );
+			}
+			d <<= 1;
+		}
 
 		tft_send_framebuffer( p_draw_buffer );
 		if( p_draw_buffer == buffer1 ) {
