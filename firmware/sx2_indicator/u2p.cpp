@@ -26,6 +26,7 @@
 #include "u2p.h"
 #include "usb_host_driver.h"
 #include "ps2dev_driver.h"
+#include <pico/time.h>
 
 enum {
 	PS2_IDLE = 0,
@@ -35,8 +36,15 @@ enum {
 static int ps2state = PS2_IDLE;
 static int mouse_x = 240 / 2, mouse_y = 135 / 2, mouse_button = 0;
 
-static volatile int ocm_status[1] = {};
+static volatile int ocm_status[6] = {};
 static int ocm_status_write_ptr;
+static int remain_bytes;
+static uint64_t start_time;
+
+// --------------------------------------------------------------------
+static uint64_t inline _get_us( void ) {
+	return to_us_since_boot( get_absolute_time() );
+}
 
 // --------------------------------------------------------------------
 static void ps2_send_datas( void ) {
@@ -86,6 +94,8 @@ static void ps2_send_datas( void ) {
 	ps2dev_send_data( delta_y );
 	ps2state = PS2_RECV_DATAS;
 	ocm_status_write_ptr = 0;
+	remain_bytes = -1;
+	start_time = _get_us();
 }
 
 // --------------------------------------------------------------------
@@ -93,10 +103,24 @@ static void ps2_recv_datas( void ) {
 	uint8_t data;
 
 	if( !ps2dev_get_receive_data( &data ) ) {
+		if( (_get_us() - start_time) > 50000 ) {
+			//	time out
+			ps2state = PS2_IDLE;
+		}
 		return;
 	}
-	ocm_status[ ocm_status_write_ptr++ ] = data;
-	if( ocm_status_write_ptr == (sizeof(ocm_status) / sizeof(ocm_status[0])) ) {
+	start_time = _get_us();
+	if( remain_bytes == -1 ) {
+		remain_bytes = data;
+		return;
+	}
+	if( remain_bytes ) {
+		if( ocm_status_write_ptr < (int)(sizeof(ocm_status) / sizeof(ocm_status[0])) ) {
+			ocm_status[ ocm_status_write_ptr++ ] = data;
+		}
+		remain_bytes--;
+	}
+	if( remain_bytes == 0 ) {
 		ps2state = PS2_IDLE;
 	}
 }
