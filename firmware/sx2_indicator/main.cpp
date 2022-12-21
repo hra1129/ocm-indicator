@@ -59,6 +59,14 @@ using namespace std;
 #define SLOT1_INFO_Y	7
 #define SLOT2_INFO_X	7
 #define SLOT2_INFO_Y	24
+#define MASTER_VOL_X	7
+#define MASTER_VOL_Y	41
+#define PSG_VOL_X		7
+#define PSG_VOL_Y		58
+#define SCC_VOL_X		7
+#define SCC_VOL_Y		75
+#define OPLL_VOL_X		7
+#define OPLL_VOL_Y		92
 
 #define BIT(d,n)		(((d) >> (n)) & 1)
 #define BITS(d,n,b)		(((d) >> (n)) & ((1 << (b)) - 1) )
@@ -121,7 +129,8 @@ static int update_msx_logo( uint16_t *p_draw_buffer, int y ) {
 
 // --------------------------------------------------------------------
 static void update_page1( uint16_t *p_draw_buffer ) {
-	static const char *s_slot_type[] = { "Real", "ASC8", "SCC+", "ASC16" };
+	static const char *s_slot_type[] = { "EXTERNAL", "ASC8", "SCC+", "ASC16" };
+	static const char *s_volume[] = { "-------", "#------", "##-----", "###----", "####---", "#####--", "#####-", "######" };
 	static char s_buffer[31] = {};
 	int d2, d3, d4, d5, d6, s;
 
@@ -149,6 +158,22 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 		sprintf( s_buffer, "S#2 %s", s_slot_type[ s ] );
 	}
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, SLOT2_INFO_X, SLOT2_INFO_Y, 0xFFFF, grp_font, s_buffer );
+	//	Master Volume
+	s = BITS( d2, 0, 3 ) ^ 7;
+	sprintf( s_buffer, "Vol  %s", s_volume[ s ] );
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, MASTER_VOL_X, MASTER_VOL_Y, 0xFFFF, grp_font, s_buffer );
+	//	PSG Volume
+	s = BITS( d3, 2, 3 );
+	sprintf( s_buffer, "PSG  %s", s_volume[ s ] );
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, PSG_VOL_X, PSG_VOL_Y, 0xFFFF, grp_font, s_buffer );
+	//	SCC+ Volume
+	s = BITS( d4, 5, 3 );
+	sprintf( s_buffer, "SCC  %s", s_volume[ s ] );
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, SCC_VOL_X, SCC_VOL_Y, 0xFFFF, grp_font, s_buffer );
+	//	OPLL Volume
+	s = BITS( d3, 5, 3 );
+	sprintf( s_buffer, "OPLL %s", s_volume[ s ] );
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, OPLL_VOL_X, OPLL_VOL_Y, 0xFFFF, grp_font, s_buffer );
 }
 
 // --------------------------------------------------------------------
