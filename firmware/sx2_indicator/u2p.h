@@ -45,9 +45,6 @@ void u2p_init( void );
 void u2p_task( void );
 
 // --------------------------------------------------------------------
-void u2p_get_mouse( int *p_x, int *p_y, int *p_button );
-
-// --------------------------------------------------------------------
 //	Get information
 //	input:
 //		index ... information index
@@ -55,7 +52,12 @@ void u2p_get_mouse( int *p_x, int *p_y, int *p_button );
 //		Information
 // --------------------------------------------------------------------
 enum {
-	U2P_LED = 0,
+	U2P_DATA1 = 0,
+	U2P_DATA2,
+	U2P_DATA3,
+	U2P_DATA4,
+	U2P_DATA5,
+	U2P_DATA6,
 };
 
 int u2p_get_information( int index );

@@ -34,7 +34,6 @@ enum {
 	PS2_RECV_DATAS,
 };
 static int ps2state = PS2_IDLE;
-static int mouse_x = 240 / 2, mouse_y = 135 / 2, mouse_button = 0;
 
 static volatile int ocm_status[6] = {};
 static int ocm_status_write_ptr;
@@ -50,29 +49,13 @@ static uint64_t inline _get_us( void ) {
 static void ps2_send_datas( void ) {
 	int16_t delta_x, delta_y;
 	int32_t button;
+	int mouse_button;
 
 	if( !ps2dev_is_send_fifo_empty() ) {
 		return;
 	}
-	delta_x = 0;
-	delta_y = 0;
-	mouse_button = 0x08;
 	if( is_mouse_active() ) {
 		get_mouse_position( &delta_x, &delta_y, &button );
-		mouse_x += delta_x;
-		mouse_y += delta_y;
-		if( mouse_x < 0 ) {
-			mouse_x = 0;
-		}
-		else if( mouse_x > 240 ) {
-			mouse_x = 240;
-		}
-		if( mouse_y < 0 ) {
-			mouse_y = 0;
-		}
-		else if( mouse_y > 135 ) {
-			mouse_y = 135;
-		}
 		if( delta_x < -128 ) {
 			delta_x = -128;
 		}
@@ -86,7 +69,12 @@ static void ps2_send_datas( void ) {
 		else if( delta_y > 127 ) {
 			delta_y = 127;
 		}
-		mouse_button |= button;
+		mouse_button = 0x08 | button;
+	}
+	else {
+		delta_x = 0;
+		delta_y = 0;
+		mouse_button = 0;
 	}
 	ps2dev_send_data( 0xFA );
 	ps2dev_send_data( mouse_button );
@@ -166,14 +154,6 @@ void u2p_init( void ) {
 // --------------------------------------------------------------------
 void u2p_task( void ) {
 	ps2_communication();
-}
-
-// --------------------------------------------------------------------
-void u2p_get_mouse( int *p_x, int *p_y, int *p_button ) {
-
-	*p_x		= mouse_x;
-	*p_y		= mouse_y;
-	*p_button	= mouse_button;
 }
 
 // --------------------------------------------------------------------
