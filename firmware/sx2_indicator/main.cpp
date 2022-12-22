@@ -55,18 +55,34 @@ using namespace std;
 #define CAPS_LED_Y		121
 #define KANA_LED_X		222
 #define KANA_LED_Y		121
-#define SLOT1_INFO_X	7
-#define SLOT1_INFO_Y	7
-#define SLOT2_INFO_X	7
-#define SLOT2_INFO_Y	24
-#define MASTER_VOL_X	7
-#define MASTER_VOL_Y	41
-#define PSG_VOL_X		7
-#define PSG_VOL_Y		58
-#define SCC_VOL_X		7
-#define SCC_VOL_Y		75
-#define OPLL_VOL_X		7
-#define OPLL_VOL_Y		92
+
+#define LINE1_Y			7
+#define LINE2_Y			24
+#define LINE3_Y			40
+#define LINE4_Y			57
+#define LINE5_Y			73
+#define LINE6_Y			89
+#define LINE7_Y			104
+
+#define LINE1_X			7
+#define LINE2_X			127
+
+#define SLOT1_INFO_X	LINE1_X
+#define SLOT1_INFO_Y	LINE1_Y
+#define SLOT2_INFO_X	LINE1_X
+#define SLOT2_INFO_Y	LINE2_Y
+#define MASTER_VOL_X	LINE1_X
+#define MASTER_VOL_Y	LINE3_Y
+#define PSG_VOL_X		LINE1_X
+#define PSG_VOL_Y		LINE4_Y
+#define SCC_VOL_X		LINE1_X
+#define SCC_VOL_Y		LINE5_Y
+#define OPLL_VOL_X		LINE1_X
+#define OPLL_VOL_Y		LINE6_Y
+#define AUTOFIRE_X		LINE1_X
+#define AUTOFIRE_Y		LINE7_Y
+#define VDP_MODE_X		LINE2_X
+#define VDP_MODE_Y		LINE1_Y
 
 #define BIT(d,n)		(((d) >> (n)) & 1)
 #define BITS(d,n,b)		(((d) >> (n)) & ((1 << (b)) - 1) )
@@ -131,6 +147,7 @@ static int update_msx_logo( uint16_t *p_draw_buffer, int y ) {
 static void update_page1( uint16_t *p_draw_buffer ) {
 	static const char *s_slot_type[] = { "EXTERNAL", "ASC8", "SCC+", "ASC16" };
 	static const char *s_volume[] = { "-------", "#------", "##-----", "###----", "####---", "#####--", "#####-", "######" };
+	static const char *s_scanline[] = { "SL 0%", "SL25%", "SL50%", "SL75%" };
 	static char s_buffer[31] = {};
 	int d2, d3, d4, d5, d6, s;
 
@@ -174,6 +191,28 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 	s = BITS( d3, 5, 3 );
 	sprintf( s_buffer, "OPLL %s", s_volume[ s ] );
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, OPLL_VOL_X, OPLL_VOL_Y, 0xFFFF, grp_font, s_buffer );
+	//	Autofire
+	s = BIT( d5, 7 );
+	if( s ) {
+		strcpy( s_buffer, "AUTOFIRE" );
+	}
+	else {
+		strcpy( s_buffer, "AUTOFIRE <<O>>" );
+	}
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, AUTOFIRE_X, AUTOFIRE_Y, 0xFFFF, grp_font, s_buffer );
+	//	VDP mode
+	if( BIT( d5, 6 ) == 0 ) {
+		strcpy( s_buffer, "V9938" );
+	}
+	else {
+		strcpy( s_buffer, "V9958" );
+	}
+	if( BIT( d4, 4 ) ) {
+		strcat( s_buffer, "-FAST" );
+	}
+	s = BITS( d5, 0, 2 );
+	strcat( s_buffer, s_scanline[s] );
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, VDP_MODE_X, VDP_MODE_Y, 0xFFFF, grp_font, s_buffer );
 }
 
 // --------------------------------------------------------------------
