@@ -58,6 +58,7 @@ enum {
 	U2P_DATA4,
 	U2P_DATA5,
 	U2P_DATA6,
+	U2P_DATA7,
 };
 
 int u2p_get_information( int index );

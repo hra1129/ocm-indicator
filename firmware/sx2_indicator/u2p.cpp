@@ -35,7 +35,7 @@ enum {
 };
 static int ps2state = PS2_IDLE;
 
-static volatile int ocm_status[6] = {};
+static volatile int ocm_status[16] = {};
 static int ocm_status_write_ptr;
 static int remain_bytes;
 static uint64_t start_time;

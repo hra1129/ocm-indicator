@@ -81,8 +81,18 @@ using namespace std;
 #define OPLL_VOL_Y		LINE6_Y
 #define AUTOFIRE_X		LINE1_X
 #define AUTOFIRE_Y		LINE7_Y
-#define VDP_MODE_X		LINE2_X
-#define VDP_MODE_Y		LINE1_Y
+#define VDP_MODE1_X		LINE2_X
+#define VDP_MODE1_Y		LINE1_Y
+#define VDP_MODE2_X		LINE2_X
+#define VDP_MODE2_Y		LINE2_Y
+#define EXT_CLK_X		LINE2_X
+#define EXT_CLK_Y		LINE3_Y
+#define PSG_2ND_X		LINE2_X
+#define PSG_2ND_Y		LINE4_Y
+#define OPL3_X			LINE2_X
+#define OPL3_Y			LINE5_Y
+#define CPU_CLK_X		LINE2_X
+#define CPU_CLK_Y		LINE6_Y
 
 #define BIT(d,n)		(((d) >> (n)) & 1)
 #define BITS(d,n,b)		(((d) >> (n)) & ((1 << (b)) - 1) )
@@ -147,15 +157,18 @@ static int update_msx_logo( uint16_t *p_draw_buffer, int y ) {
 static void update_page1( uint16_t *p_draw_buffer ) {
 	static const char *s_slot_type[] = { "EXTERNAL", "ASC8", "SCC+", "ASC16" };
 	static const char *s_volume[] = { "-------", "#------", "##-----", "###----", "####---", "#####--", "#####-", "######" };
-	static const char *s_scanline[] = { "SL 0%", "SL25%", "SL50%", "SL75%" };
+	static const char *s_scanline[] = { ":SL 0%", ":SL25%", ":SL50%", ":SL75%" };
+	//                                                     0010       0011       0100       0101       0110       0111       1000
+	static const char *s_clock[] = { "5.37MHz", "3.58MHz", "8.06MHz", "6.96MHz", "6.10MHz", "5.39MHz", "4.90MHz", "4.48MHz", "4.10MHz" };
 	static char s_buffer[31] = {};
-	int d2, d3, d4, d5, d6, s;
+	int d2, d3, d4, d5, d6, d7, s;
 
 	d2 = u2p_get_information( U2P_DATA2 );
 	d3 = u2p_get_information( U2P_DATA3 );
 	d4 = u2p_get_information( U2P_DATA4 );
 	d5 = u2p_get_information( U2P_DATA5 );
 	d6 = u2p_get_information( U2P_DATA6 );
+	d7 = u2p_get_information( U2P_DATA7 );
 
 	//	SLOT#1
 	s = BITS( d2, 3, 2 );
@@ -197,10 +210,10 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 		strcpy( s_buffer, "AUTOFIRE" );
 	}
 	else {
-		strcpy( s_buffer, "AUTOFIRE <<O>>" );
+		strcpy( s_buffer, "AUTOFIRE (O)" );
 	}
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, AUTOFIRE_X, AUTOFIRE_Y, 0xFFFF, grp_font, s_buffer );
-	//	VDP mode
+	//	VDP mode 1
 	if( BIT( d5, 6 ) == 0 ) {
 		strcpy( s_buffer, "V9938" );
 	}
@@ -208,11 +221,83 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 		strcpy( s_buffer, "V9958" );
 	}
 	if( BIT( d4, 4 ) ) {
-		strcat( s_buffer, "-FAST" );
+		strcat( s_buffer, "-H" );
 	}
 	s = BITS( d5, 0, 2 );
 	strcat( s_buffer, s_scanline[s] );
-	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, VDP_MODE_X, VDP_MODE_Y, 0xFFFF, grp_font, s_buffer );
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, VDP_MODE1_X, VDP_MODE1_Y, 0xFFFF, grp_font, s_buffer );
+	//	VDP mode 2
+	if( BIT( d6, 5 ) == 0 ) {
+		if( BIT( d6, 4 ) == 0 ) {
+			strcpy( s_buffer, "VSYNC:60Hz" );
+		}
+		else {
+			strcpy( s_buffer, "VSYNC:50Hz" );
+		}
+	}
+	else {
+		strcpy( s_buffer, "VSYNC:AUTO" );
+	}
+	s = BITS( d5, 0, 2 );
+	strcat( s_buffer, s_scanline[s] );
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, VDP_MODE2_X, VDP_MODE2_Y, 0xFFFF, grp_font, s_buffer );
+	//	External Clock
+	if( BIT( d6, 6 ) == 0 ) {
+		strcpy( s_buffer, "SLOT CLK = CPU CLK" );
+	}
+	else {
+		strcpy( s_buffer, "SLOT CLK = 3.58MHz" );
+	}
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, EXT_CLK_X, EXT_CLK_Y, 0xFFFF, grp_font, s_buffer );
+	//	2nd PSG
+	if( BIT( d5, 2 ) == 0 ) {
+		strcpy( s_buffer, "PSG2:DIS " );
+	}
+	else {
+		strcpy( s_buffer, "PSG2:ACT " );
+	}
+	if( BIT( d5, 5 ) == 0 ) {
+		strcat( s_buffer, "KB:JP" );
+	}
+	else {
+		strcat( s_buffer, "KB:NON JP" );
+	}
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, PSG_2ND_X, PSG_2ND_Y, 0xFFFF, grp_font, s_buffer );
+	//	OPL3
+	if( BIT( d6, 3 ) == 0 ) {
+		strcpy( s_buffer, "OPL3:DIS " );
+	}
+	else {
+		strcpy( s_buffer, "OPL3:ACT " );
+	}
+	if( BIT( d6, 0 ) == 0 ) {
+		strcat( s_buffer, "LR:NORMAL" );
+	}
+	else {
+		strcat( s_buffer, "LR:INVERSE" );
+	}
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, OPL3_X, OPL3_Y, 0xFFFF, grp_font, s_buffer );
+	//	CPU Clock
+	if( BIT( d6, 7 ) == 1 ) {
+		//	Custom speed mode
+		s = BITS( d4, 0, 4 );
+		if( s < 2 ) {
+			s = 2;
+		}
+		else if( s > 8 ) {
+			s = 8;
+		}
+	}
+	else if( BIT( d7, 0 ) == 0 ) {
+		//	Z80B mode
+		s = 0;
+	}
+	else {
+		//	Z80A mode
+		s = 1;
+	}
+	sprintf( s_buffer, "CPU CLK:%s", s_clock[s] );
+	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, CPU_CLK_X, CPU_CLK_Y, 0xFFFF, grp_font, s_buffer );
 }
 
 // --------------------------------------------------------------------

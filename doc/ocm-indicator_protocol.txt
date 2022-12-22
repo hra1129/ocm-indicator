@@ -27,13 +27,14 @@ OCM Indicator protocol
 	I: mouse button
 	I: delta X
 	I: delta Y
-	H: Length
+	H: Length (7)
 	H: data1
 	H: data2
 	H: data3
 	H: data4
 	H: data5
 	H: data6
+	H: data7
 
 	3-1. mouse button
 		bit7                 bit0
@@ -90,6 +91,7 @@ OCM Indicator protocol
 
 	3-10. data6
 		[0][EX][NP][FV][O3][S1][S2][RI]
+			bit7:[CS] ... ff_clksel, 0: normal, 1: CustomSpeed
 			bit6:[EX] ... extclk3m: External Clock 3.58MHz, 0: No, 1: Yes
 			bit5:[NP] ... ntsc_pal_type, 0: Forced, 1: Auto
 			bit4:[FV] ... forced_v_mode, 0: 60Hz, 1: 50Hz
@@ -97,6 +99,10 @@ OCM Indicator protocol
 			bit2:[S1] ... iSlt1_linear, 0: normal, 1: linear
 			bit1:[S2] ... iSlt2_linear, 0: normal, 1: linear
 			bit0:[RI] ... right_inverse
+
+	3-11. data7
+		[0][0][0][0][0][0][0][5M]
+			bit0:[5M] ... ff_clksel5m_n, 0: 5.37MHz (Panasonic Z80B mode), 1: 3.58MHz (Normal Z80A mode)
 
 ===============================================================================
 History
