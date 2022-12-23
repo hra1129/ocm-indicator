@@ -221,10 +221,11 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 		strcpy( s_buffer, "V9958" );
 	}
 	if( BIT( d4, 4 ) ) {
-		strcat( s_buffer, "-H" );
+		strcat( s_buffer, "-FAST" );
 	}
-	s = BITS( d5, 0, 2 );
-	strcat( s_buffer, s_scanline[s] );
+	else {
+		strcat( s_buffer, "-STD" );
+	}
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, VDP_MODE1_X, VDP_MODE1_Y, 0xFFFF, grp_font, s_buffer );
 	//	VDP mode 2
 	if( BIT( d6, 5 ) == 0 ) {
