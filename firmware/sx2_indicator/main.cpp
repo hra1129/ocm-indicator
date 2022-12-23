@@ -156,7 +156,7 @@ static int update_msx_logo( uint16_t *p_draw_buffer, int y ) {
 // --------------------------------------------------------------------
 static void update_page1( uint16_t *p_draw_buffer ) {
 	static const char *s_slot_type[] = { "EXTERNAL", "ASC8", "SCC+", "ASC16" };
-	static const char *s_volume[] = { "-------", "#------", "##-----", "###----", "####---", "#####--", "#####-", "######" };
+	static const char *s_volume[] = { "-------", "`------", "``-----", "```----", "````---", "`````--", "`````-", "``````" };
 	static const char *s_scanline[] = { ":SL 0%", ":SL25%", ":SL50%", ":SL75%" };
 	//                                                     0010       0011       0100       0101       0110       0111       1000
 	static const char *s_clock[] = { "5.37MHz", "3.58MHz", "8.06MHz", "6.96MHz", "6.10MHz", "5.39MHz", "4.90MHz", "4.48MHz", "4.10MHz" };
@@ -210,7 +210,7 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 		strcpy( s_buffer, "AUTOFIRE" );
 	}
 	else {
-		strcpy( s_buffer, "AUTOFIRE (O)" );
+		strcpy( s_buffer, "AUTOFIRE `" );
 	}
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, AUTOFIRE_X, AUTOFIRE_Y, 0xFFFF, grp_font, s_buffer );
 	//	VDP mode 1
@@ -229,52 +229,52 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 	//	VDP mode 2
 	if( BIT( d6, 5 ) == 0 ) {
 		if( BIT( d6, 4 ) == 0 ) {
-			strcpy( s_buffer, "VSYNC:60Hz" );
+			strcpy( s_buffer, "VS:60Hz" );
 		}
 		else {
-			strcpy( s_buffer, "VSYNC:50Hz" );
+			strcpy( s_buffer, "VS:50Hz" );
 		}
 	}
 	else {
-		strcpy( s_buffer, "VSYNC:AUTO" );
+		strcpy( s_buffer, "VS:AT" );
 	}
 	s = BITS( d5, 0, 2 );
 	strcat( s_buffer, s_scanline[s] );
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, VDP_MODE2_X, VDP_MODE2_Y, 0xFFFF, grp_font, s_buffer );
 	//	External Clock
 	if( BIT( d6, 6 ) == 0 ) {
-		strcpy( s_buffer, "SLOT CLK = CPU CLK" );
+		strcpy( s_buffer, "EXCLK=CPU" );
 	}
 	else {
-		strcpy( s_buffer, "SLOT CLK = 3.58MHz" );
+		strcpy( s_buffer, "EXCLK=3.58MHz" );
 	}
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, EXT_CLK_X, EXT_CLK_Y, 0xFFFF, grp_font, s_buffer );
 	//	2nd PSG
 	if( BIT( d5, 2 ) == 0 ) {
-		strcpy( s_buffer, "PSG2:DIS " );
+		strcpy( s_buffer, "P2:- " );
 	}
 	else {
-		strcpy( s_buffer, "PSG2:ACT " );
+		strcpy( s_buffer, "P2:\\ " );
 	}
 	if( BIT( d5, 5 ) == 0 ) {
 		strcat( s_buffer, "KB:JP" );
 	}
 	else {
-		strcat( s_buffer, "KB:NON JP" );
+		strcat( s_buffer, "KB:NJP" );
 	}
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, PSG_2ND_X, PSG_2ND_Y, 0xFFFF, grp_font, s_buffer );
 	//	OPL3
 	if( BIT( d6, 3 ) == 0 ) {
-		strcpy( s_buffer, "OPL3:DIS " );
+		strcpy( s_buffer, "OPL3:- " );
 	}
 	else {
-		strcpy( s_buffer, "OPL3:ACT " );
+		strcpy( s_buffer, "OPL3:\\ " );
 	}
 	if( BIT( d6, 0 ) == 0 ) {
-		strcat( s_buffer, "LR:NORMAL" );
+		strcat( s_buffer, "LR:N" );
 	}
 	else {
-		strcat( s_buffer, "LR:INVERSE" );
+		strcat( s_buffer, "LR:I" );
 	}
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, OPL3_X, OPL3_Y, 0xFFFF, grp_font, s_buffer );
 	//	CPU Clock
@@ -296,7 +296,7 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 		//	Z80A mode
 		s = 1;
 	}
-	sprintf( s_buffer, "CPU CLK:%s", s_clock[s] );
+	sprintf( s_buffer, "CPU:%s", s_clock[s] );
 	tft_puts( p_draw_buffer, IMAGE_WIDTH, IMAGE_HEIGHT, CPU_CLK_X, CPU_CLK_Y, 0xFFFF, grp_font, s_buffer );
 }
 
