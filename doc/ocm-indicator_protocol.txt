@@ -39,11 +39,11 @@ OCM Indicator protocol
 	3-1. mouse button
 		bit7                 bit0
 		[0][0][0][J][E][C][R][L]
-			[J] .... mouse or joypad, 0: mouse, 1: joypad
-			[E] .... mouse/joypad connect status, 0: disabled, 1: enabled
-			[C] .... Center button, 0: release, 1: pressed
-			[R] .... Right  button, 0: release, 1: pressed
-			[L] .... Left   button, 0: release, 1: pressed
+			bit4:[J] .... mouse or joypad, 0: mouse, 1: joypad
+			bit3:[E] .... mouse/joypad connect status, 0: disabled, 1: enabled
+			bit2:[C] .... Center button, 0: release, 1: pressed
+			bit1:[R] .... Right  button, 0: release, 1: pressed
+			bit0:[L] .... Left   button, 0: release, 1: pressed
 
 	3-2. delta X
 		X shift amount expressed in 8-bit two's complement
