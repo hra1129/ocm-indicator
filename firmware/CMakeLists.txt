@@ -26,6 +26,6 @@ add_compile_options(-Wall
 
 # Hardware-specific examples in subdirectories:
 add_subdirectory(sx2_indicator)
-add_subdirectory(usb_host_test)
-add_subdirectory(host_cdc_msc_hid)
-add_subdirectory(usb_gamepad_bridge_for_msx)
+#add_subdirectory(usb_host_test)
+#add_subdirectory(host_cdc_msc_hid)
+#add_subdirectory(usb_gamepad_bridge_for_msx)
