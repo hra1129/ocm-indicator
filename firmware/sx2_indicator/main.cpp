@@ -166,7 +166,7 @@ static void update_page1( uint16_t *p_draw_buffer ) {
 		"``````-", // 6
 		"```````"  // 7
 	};
-	static const char *s_scanline[] = { ":SL 0%", ":SL25%", ":SL50%", ":SL75%" };
+	static const char *s_scanline[] = { ":SL 0%", ":SL12%", ":SL25%", ":SL50%" };
 	//                                                     0010       0011       0100       0101       0110       0111       1000
 	static const char *s_clock[] = { "5.37MHz", "3.58MHz", "8.06MHz", "6.96MHz", "6.10MHz", "5.39MHz", "4.90MHz", "4.48MHz", "4.10MHz" };
 	static char s_buffer[31] = {};
